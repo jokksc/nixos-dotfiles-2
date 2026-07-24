@@ -34,18 +34,18 @@ in
 #    '';
   };
   
-  programs.alacritty={
-    enable = true;
-    settings = {
-      window.opacity = 0.9;
-      font.normal = {
-        family = "JetBrains Mono";
-        style = "Regular";
-      };
-      font.size = 12;
-    };
-    
-  };
+#  programs.alacritty={
+#    enable = true;
+#    settings = {
+#      window.opacity = 0.9;
+#      font.normal = {
+#        family = "JetBrains Mono";
+#        style = "Regular";
+#      };
+#      font.size = 12;
+#    };
+#    
+#  };
   
 #  home.file.".config/qtile".source = ./home-manager-dotfiles/qtile;
   home.file.".config/bat/config".text = ''
@@ -59,17 +59,17 @@ in
 #    recursive = true;
 #  };
 
-#  xdg.configFile = builtins.mapAttrs
-#    (name: subpath {
-#      source = create_symlink "${dotfiles/subpath}";
-#      recursive = true;
-#  })
-#  configs;
+  xdg.configFile = builtins.mapAttrs
+    (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
-  xdg.configFile."qtile" = {
-    source = create_symlink "${dotfiles}/qtile/";
-    recursive = true;
-  };
+#  xdg.configFile."qtile" = {
+#    source = create_symlink "${dotfiles}/qtile/";
+#    recursive = true;
+#  };
   
   home.packages = with pkgs; [
     bat
