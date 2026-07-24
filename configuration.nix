@@ -24,7 +24,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "vboxvideo" ];
 
-  time.timeZone = "Europe/Lithuania";
+  time.timeZone = "Europe/Vilnius";
   i18n.defaultLocale = "lt_LT.UTF-8";
   i18n.supportedLocales = [ "lt_LT.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ] ;
   i18n.extraLocaleSettings = {
