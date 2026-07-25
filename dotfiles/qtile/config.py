@@ -12,7 +12,7 @@ import subprocess
 
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.run(["xrandr", "--output", "Virtual-1", "--mode", "1280x720"])
+    subprocess.run(["xrandr", "--output", "Virtual-1", "--mode", "1920x1080"])
     subprocess.run(["xwallpaper", "--zoom", f"{home}/Downloads/wallhaven-e86mv8.jpg"])
 mod = "mod4"
 terminal = guess_terminal()
