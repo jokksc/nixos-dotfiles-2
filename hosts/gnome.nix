@@ -8,7 +8,7 @@
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     epiphany
-    gnome-photos
+  #  gnome-photos
   ];
 
   environment.systemPackages = with pkgs; [
