@@ -30,7 +30,7 @@
   in
   {
     nixosConfigurations = {
-      jok-nixos-qtile = mkHost {
+      jok-nixos = mkHost {
         desktopModule = ./hosts/qtile.nix;
         homeModule = ./home/qtile.nix;
       };

@@ -1,19 +1,11 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+let
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+in
 {
-  services.xserver = {
-    enable = true;
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 35;
-    windowManager.qtile.enable = true;
-    displayManager.sessionCommands = ''
-      xwallpaper --zoom ~/Downloads/wallhaven-e86mv8.jpg
-    '';
-  };
-  services.displayManager.ly.enable = true;
-
-  services.picom = {
-    enable = true;
-    backend = "glx";
-    fade = true;
+  xdg.configFile."qtile" = {
+    source = create_symlink "${dotfiles}/qtile";
+    recursive = true;
   };
 }

@@ -1,43 +1,86 @@
+{ config, pkgs, ...}:
+let
+#  secrets = import ./secrets.nix
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  configs = {
+    alacritty = "alacritty";
+#    nvim = "nvim";
+  };
+in    
 {
-  description = "NixOS from Scratch";
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-26.05";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+  home.username = "jokub";
+  home.homeDirectory = "/home/jokub";
+  home.stateVersion = "26.05";
+  
+#  programs.git = {
+#    enable = true;
+#    userName = "jokksc"
+#    userEmail = ""
+#  };
+# skipped for now, since idk how to store emails/secrets  without pushing to git repos 
+  
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      btw = "echo i use nixos btw";
+#      nrs = "sudo nixos-rebuild switch";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
     };
   };
+  programs.opencode = {
+    enable = true;  
+  };
+#    initExtra = ''
+#      export PS1='\[\e[48;5;33m\]\u\[\e[0m\] \[\e[48;5;33m\]in \w\[\e[0m\] \\$ '
+#    '';
+  
+#  programs.alacritty={
+#    enable = true;
+#    settings = {
+#      window.opacity = 0.9;
+#      font.normal = {
+#        family = "JetBrains Mono";
+#        style = "Regular";
+#      };
+#      font.size = 12;
+#    };
+#    
+#  };
+  
+#  home.file.".config/qtile".source = ./home-manager-dotfiles/qtile;
+  home.file.".config/bat/config".text = ''
+    --theme="Nord"
+    --style="numbers,changes,grid"
+    --paging=auto
+  '';
+  
+#  xdg.configFile."qtile" = { # this symlinks config existing in home-manager-dotfiles to current nix build, making it easier to change and get live updates, without needing to rebuild nixos
+#    source = config.lib.file.mkOutOfStoreSymlink "/home/jokub/nixos-dotfiles-2/home-manager-dotfiles/qtile/";
+#    recursive = true;
+#  };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-  let
-    mkHost = { desktopModule, homeModule }: nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hardware-configuration.nix
-        ./hosts/common.nix
-        desktopModule
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "backup";
-            users.jokub = { imports = [ ./home/common.nix homeModule ]; };
-          };
-        }
-      ];
-    };
-  in
-  {
-    nixosConfigurations = {
-      jok-nixos-qtile = mkHost {
-        desktopModule = ./hosts/qtile.nix;
-        homeModule = ./home/qtile.nix;
-      };
-      jok-nixos-gnome = mkHost {
-        desktopModule = ./hosts/gnome.nix;
-        homeModule = ./home/gnome.nix;
-      };
-    };
-  };
+  xdg.configFile = builtins.mapAttrs
+    (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
+
+#  xdg.configFile."qtile" = {
+#    source = create_symlink "${dotfiles}/qtile/";
+#    recursive = true;
+#  };
+  
+  home.packages = with pkgs; [
+    bat
+    atool
+    httpie
+    neovim
+    nil #lsp for nix language
+    nixpkgs-fmt
+    ripgrep # used for telescope to work?
+    # nodejs
+    # gss # for compilation
+  ];
 }
