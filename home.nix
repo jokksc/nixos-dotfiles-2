@@ -28,11 +28,13 @@ in
 #      nrs = "sudo nixos-rebuild switch";
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
     };
-    
+  };
+  programs.opencode = {
+    enable = true;  
+  };
 #    initExtra = ''
 #      export PS1='\[\e[48;5;33m\]\u\[\e[0m\] \[\e[48;5;33m\]in \w\[\e[0m\] \\$ '
 #    '';
-  };
   
 #  programs.alacritty={
 #    enable = true;
