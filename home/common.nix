@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, inputs, ...}:
 let
 #  secrets = import ./secrets.nix
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
@@ -9,6 +9,10 @@ let
   };
 in    
 {
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+  
   home.username = "jokub";
   home.homeDirectory = "/home/jokub";
   home.stateVersion = "26.05";
@@ -25,11 +29,16 @@ in
     shellAliases = {
       btw = "echo i use nixos btw";
 #      nrs = "sudo nixos-rebuild switch";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos-gnome";
     };
   };
   programs.opencode = {
     enable = true;  
+  };
+  
+  programs.zen-browser = {
+    enable = true;
+    setAsDefaultBrowser = true;
   };
 #    initExtra = ''
 #      export PS1='\[\e[48;5;33m\]\u\[\e[0m\] \[\e[48;5;33m\]in \w\[\e[0m\] \\$ '
@@ -82,5 +91,6 @@ in
     ripgrep # used for telescope to work?
     # nodejs
     # gss # for compilation
+    obsidian
   ];
 }
