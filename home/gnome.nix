@@ -17,6 +17,9 @@
          "zen-beta.desktop"
        ];
      };
+     "org/gnome/desktop/peripherals/mouse" = {
+       speed = "-0.13"
+     };
    };
 
   # gnome shell extensions managed via home-manager
