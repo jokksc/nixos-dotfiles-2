@@ -38,6 +38,10 @@
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+    powerManagement = {
+      enable = true;
+      finegrained = false; #claude said to set this to true if its a hybrid laptop gpu
+    };
   };
   
   hardware.graphics = {
