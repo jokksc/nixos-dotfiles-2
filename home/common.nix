@@ -93,5 +93,6 @@ in
     # gss # for compilation
     obsidian
     localsend
+    vesktop
   ];
 }
