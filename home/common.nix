@@ -92,5 +92,6 @@ in
     # nodejs
     # gss # for compilation
     obsidian
+    localsend
   ];
 }
