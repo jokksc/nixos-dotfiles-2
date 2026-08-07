@@ -76,11 +76,13 @@
     distrobox
     podman
     bazaar
-    usbmuxd # app for usb connection with ios?
+    # usbmuxd # app for usb connection with ios?
+    # using services.usbmuxd.enable instead
   ];
   
   services = {
     flatpak.enable = true;
+    usbmuxd.enable = true; # ios usb thing
   };
 
   fonts.packages = with pkgs; [
