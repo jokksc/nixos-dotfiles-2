@@ -58,6 +58,7 @@
     pfetch
     distrobox
     podman
+    bazaar
   ];
   
   services = {
