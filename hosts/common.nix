@@ -27,6 +27,23 @@
     LC_TELEPHONE = "lt_LT.UTF-8";
     LC_TIME = "lt_LT.UTF-8";
   };
+  
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+  };
+  
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
