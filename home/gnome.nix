@@ -20,6 +20,9 @@
      "org/gnome/desktop/peripherals/mouse" = {
        speed = -0.13;
      };
+     "org/gnome/desktop/interface" = {
+       text-scaling-factor = 1.15;
+     };
    };
 
   # gnome shell extensions managed via home-manager
