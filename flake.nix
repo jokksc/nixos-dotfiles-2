@@ -13,6 +13,10 @@
         home-manager.follows = "home-manager";
       };
     };
+    # nix-flatpak = {
+    #   url = "https://github.com/gmodena/nix-flatpak"
+    # };
+    # i'll implement this later
   };
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let

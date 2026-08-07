@@ -57,7 +57,12 @@
     git 
     pfetch
     distrobox
+    podman
   ];
+  
+  services = {
+    flatpak.enable = true;
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -86,7 +91,9 @@
   };
 
   services.openssh.enable = true;
-  
+
+  virtualisation.podman.enable = true;
+    
   # virtualisation.virtualbox.guest.enable = true;
   system.stateVersion = "26.05";
 }
