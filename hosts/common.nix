@@ -76,6 +76,7 @@
     distrobox
     podman
     bazaar
+    usbmuxd # app for usb connection with ios?
   ];
   
   services = {
