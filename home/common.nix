@@ -86,7 +86,8 @@ in
     atool
     httpie
     neovim
-    nil #lsp for nix language
+    # nil #lsp for nix language
+    nixd # switched to this
     nixpkgs-fmt
     ripgrep # used for telescope to work?
     # nodejs
