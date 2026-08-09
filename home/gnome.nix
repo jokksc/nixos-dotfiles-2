@@ -15,6 +15,16 @@
        favorite-apps = [
          "org.gnome.Nautilus.desktop"
          "zen-beta.desktop"
+         "org.gnome.Console.desktop"
+         "vesktop.desktop"
+         "org.telegram.desktop.desktop"
+         "obsidian.desktop"
+         "com.spotify.Client.desktop"
+         "com.stremio.Stremio.desktop"
+         "steam.desktop"
+         "org.prismlauncher.PrismLauncher.desktop"
+         "io.github.kolunmi.Bazaar.desktop"
+         "org.gnome.Settings.desktop"
        ];
      };
      "org/gnome/desktop/peripherals/mouse" = {
