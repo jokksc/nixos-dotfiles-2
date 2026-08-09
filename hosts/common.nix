@@ -81,6 +81,7 @@
     distrobox
     podman
     bazaar
+    vscodium
     # usbmuxd # app for usb connection with ios?
     # using services.usbmuxd.enable instead
   ];
