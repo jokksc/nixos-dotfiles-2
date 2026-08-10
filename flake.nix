@@ -25,7 +25,7 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs primaryUser; };
       modules = [
-        ./hardware-configuration.nix
+        hardwareConfig
         ./hosts/common.nix
         desktopModule
         home-manager.nixosModules.home-manager
@@ -48,6 +48,7 @@
     #     homeModule = ./home/qtile.nix;
     #   };
       jok-nixos = mkHost {
+        hardwareConfig = ./hosts/jok-nixos/hardware-configuration.nix
         desktopModule = ./modules/nixos/desktops/gnome.nix;
         homeModule = ./home/gnome.nix;
       };
