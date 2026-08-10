@@ -21,7 +21,7 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     primaryUser = "jokub";
-    mkHost = { desktopModule, homeModule, ... }: nixpkgs.lib.nixosSystem {
+    mkHost = { desktopModule, homeModule, hardwareConfig, ... }: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs primaryUser; };
       modules = [
