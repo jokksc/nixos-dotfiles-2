@@ -48,7 +48,7 @@
         homeModule = ./home/qtile.nix;
       };
       jok-nixos-gnome = mkHost {
-        desktopModule = ./hosts/gnome.nix;
+        desktopModule = ./modules/desktops/gnome/gnome.nix;
         homeModule = ./home/gnome.nix;
       };
     };
