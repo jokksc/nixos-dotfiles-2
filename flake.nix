@@ -13,6 +13,9 @@
         home-manager.follows = "home-manager";
       };
     };
+ #   iloader = {
+ #     url = "github:nab138/iloader";
+ #   };
     # nix-flatpak = {
     #   url = "https://github.com/gmodena/nix-flatpak";
     # };
@@ -26,7 +29,7 @@
       specialArgs = { inherit inputs primaryUser; };
       modules = [
         hardwareConfig
-        ./hosts/common.nix
+        ./modules/nixos/common.nix
         desktopModule
         home-manager.nixosModules.home-manager
         {
