@@ -1,2 +1,3 @@
 - [ ] write my user into ./users/jokub.nix
-- [ ] 
+- [ ] put desktops into /modules/nixos/desktop
+- [ ] put home configs into /modules/home
