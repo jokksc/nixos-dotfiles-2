@@ -1,0 +1,2 @@
+- [ ] write my user into ./users/jokub.nix
+- [ ] 
