@@ -70,6 +70,8 @@
     podman
     bazaar
     vscodium
+    kdePackages.filelight
+    pinta
     # usbmuxd # app for usb connection with ios?
     # using services.usbmuxd.enable instead
 #  ] ++ [
