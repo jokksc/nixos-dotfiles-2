@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, primaryUser, ... }:
 {
   # boot.loader.grub.enable = true;
   # boot.loader.grub.device = "/dev/sda";
@@ -52,9 +52,9 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  users.users."jokub" = {
+  users.users.${primaryUser} = {
     isNormalUser = true;
-    description = "Jokubas";
+    description = "main account";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
@@ -89,7 +89,12 @@
   services = {
     flatpak.enable = true;
     usbmuxd.enable = true; # ios usb thing
-    tailscale.enable = true;
+    tailscale = {
+      enable = true;
+      extraSetFlags = [
+        "--operator=${primaryUser}"  
+      ];
+    };
   };
 
   fonts.packages = with pkgs; [
