@@ -43,11 +43,11 @@
   in
   {
     nixosConfigurations = {
+    #   jok-nixos = mkHost {
+    #     desktopModule = ./hosts/qtile.nix;
+    #     homeModule = ./home/qtile.nix;
+    #   };
       jok-nixos = mkHost {
-        desktopModule = ./hosts/qtile.nix;
-        homeModule = ./home/qtile.nix;
-      };
-      jok-nixos-gnome = mkHost {
         desktopModule = ./modules/desktops/gnome/gnome.nix;
         homeModule = ./home/gnome.nix;
       };
