@@ -14,7 +14,7 @@
       };
     };
     # nix-flatpak = {
-    #   url = "https://github.com/gmodena/nix-flatpak"
+    #   url = "https://github.com/gmodena/nix-flatpak";
     # };
     # i'll implement this later
   };

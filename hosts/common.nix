@@ -89,6 +89,7 @@
   services = {
     flatpak.enable = true;
     usbmuxd.enable = true; # ios usb thing
+    tailscale.enable = true;
   };
 
   fonts.packages = with pkgs; [
