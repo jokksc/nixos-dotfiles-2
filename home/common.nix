@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ...}:
 let
 #  secrets = import ./secrets.nix
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
+  dotfiles = "./dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     alacritty = "alacritty";
