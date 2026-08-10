@@ -30,6 +30,7 @@ in
       btw = "echo i use nixos btw";
 #      nrs = "sudo nixos-rebuild switch";
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos-gnome";
+      syu = "sudo nix flake update --flake ~/nixos-dotfiles-2 && sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos-gnome";
     };
   };
   programs.opencode = {

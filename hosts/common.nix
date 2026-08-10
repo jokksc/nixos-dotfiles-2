@@ -54,7 +54,7 @@
 
   users.users.${primaryUser} = {
     isNormalUser = true;
-    description = "main account";
+    description = "Jokubas";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
