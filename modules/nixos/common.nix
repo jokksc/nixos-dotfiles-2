@@ -4,8 +4,8 @@
   # boot.loader.grub.device = "/dev/sda";
   
   imports = [
-    ./modules/locale/default.nix
-  ]
+    ./locale/default.nix
+  ];
   
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -59,8 +59,8 @@
     alacritty 
     neovim 
     btop 
-    gedit
-    xwallpaper 
+    # gedit
+    # xwallpaper 
     vscode 
     pcmanfm 
     rofi 
