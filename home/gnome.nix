@@ -16,6 +16,7 @@
          "org.gnome.Nautilus.desktop"
          "zen-beta.desktop"
          "org.gnome.Console.desktop"
+         "org.gnome.Ptyxis.desktop"
          "vesktop.desktop"
          "org.telegram.desktop.desktop"
          "obsidian.desktop"
