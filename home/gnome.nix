@@ -42,6 +42,6 @@
      gnomeExtensions.dash-to-dock
   #   gnomeExtensions.appindicator
      gnomeExtensions.blur-my-shell
-  #   gnomeExtensions.brightness-control-using-ddcutil
+     gnomeExtensions.brightness-control-using-ddcutil
    ];
 }
