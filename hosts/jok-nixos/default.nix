@@ -1,5 +1,5 @@
 { config, lib, pkgs, ...}:
-    
+# im not using this yet    
 {
   imports = [
     ./hardware-configuration.nix
