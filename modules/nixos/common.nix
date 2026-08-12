@@ -9,6 +9,8 @@
   
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelModules = [ "i2c-dev" ]; # needs for ddcutil to work
+  hardware.i2c.enable = true; 
   
   networking.hostName = "jok-nixos";
   networking.networkmanager.enable = true;
@@ -72,6 +74,9 @@
     vscodium
     kdePackages.filelight
     pinta
+    rnote
+    ptyxis
+    ddcutil
     # usbmuxd # app for usb connection with ios?
     # using services.usbmuxd.enable instead
 #  ] ++ [

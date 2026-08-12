@@ -97,5 +97,6 @@ in
     localsend
     vesktop
     prismlauncher
+    # ptyxis
   ];
 }

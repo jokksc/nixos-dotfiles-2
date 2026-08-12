@@ -26,6 +26,7 @@
          "io.github.kolunmi.Bazaar.desktop"
          "org.gnome.Settings.desktop"
        ];
+       always-show-log-out = true;
      };
      "org/gnome/desktop/peripherals/mouse" = {
        speed = -0.13;
@@ -41,6 +42,6 @@
      gnomeExtensions.dash-to-dock
   #   gnomeExtensions.appindicator
      gnomeExtensions.blur-my-shell
-     
+  #   gnomeExtensions.brightness-control-using-ddcutil
    ];
 }
