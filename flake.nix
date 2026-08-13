@@ -21,7 +21,7 @@
     # };
     # i'll implement this later
   };
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, primaryUser, ... }@inputs:
   let
     primaryUser = "jokub";
     mkHost = { homeModule, mainConfiguration, ... }: nixpkgs.lib.nixosSystem {
@@ -55,7 +55,7 @@
         # hardwareConfig = ./hosts/jok-nixos/hardware-configuration.nix;
         # desktopModule = ./modules/nixos/desktops/gnome.nix;
         homeModule = ./home/gnome.nix;
-        mainConfiguration = ./hosts/jok-nixos/default.nix
+        mainConfiguration = ./hosts/jok-nixos/default.nix;
       };
     };
   };
