@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # GNOME-specific home-manager config goes here.
   # Uncomment/adjust as you figure out what you actually want.
@@ -35,13 +35,20 @@
      "org/gnome/desktop/interface" = {
        text-scaling-factor = 1.15;
      };
+     "org/gnome/desktop/input-sources" = {
+       sources = [
+        # [('xkb', 'us'), ('xkb', 'lt')]
+        (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
+        (lib.hm.gvariant.mkTuple [ "xkb" "lt" ])
+       ];
+     };
    };
 
   # gnome shell extensions managed via home-manager
   # (requires the gnomeExtensions packages + gnome-shell-extensions module)
    home.packages = with pkgs; [
      gnomeExtensions.dash-to-dock
-  #   gnomeExtensions.appindicator
+     gnomeExtensions.appindicator
      gnomeExtensions.blur-my-shell
      gnomeExtensions.brightness-control-using-ddcutil
    ];

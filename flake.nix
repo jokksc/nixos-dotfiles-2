@@ -21,7 +21,7 @@
     # };
     # i'll implement this later
   };
-  outputs = { self, nixpkgs, home-manager, primaryUser, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     primaryUser = "jokub";
     mkHost = { homeModule, mainConfiguration, ... }: nixpkgs.lib.nixosSystem {
