@@ -24,13 +24,14 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     primaryUser = "jokub";
-    mkHost = { desktopModule, homeModule, hardwareConfig, ... }: nixpkgs.lib.nixosSystem {
+    mkHost = { homeModule, mainConfiguration, ... }: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs primaryUser; };
       modules = [
-        hardwareConfig
-        ./modules/nixos/common.nix
-        desktopModule
+        # hardwareConfig
+        # ./modules/nixos/common.nix
+        # desktopModule
+        mainConfiguration
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -51,9 +52,10 @@
     #     homeModule = ./home/qtile.nix;
     #   };
       jok-nixos = mkHost {
-        hardwareConfig = ./hosts/jok-nixos/hardware-configuration.nix;
-        desktopModule = ./modules/nixos/desktops/gnome.nix;
+        # hardwareConfig = ./hosts/jok-nixos/hardware-configuration.nix;
+        # desktopModule = ./modules/nixos/desktops/gnome.nix;
         homeModule = ./home/gnome.nix;
+        mainConfiguration = ./hosts/jok-nixos/default.nix
       };
     };
   };
