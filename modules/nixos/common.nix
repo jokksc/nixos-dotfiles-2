@@ -77,6 +77,7 @@
     rnote
     ptyxis
     ddcutil
+    pika-backup
     # usbmuxd # app for usb connection with ios?
     # using services.usbmuxd.enable instead
 #  ] ++ [
