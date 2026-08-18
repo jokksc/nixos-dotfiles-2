@@ -18,4 +18,10 @@ in
     enable = true;
     enable32Bit = true;
   };
+  
+  networking.networkmanager.enable = true;
+  
+  nixpkgs.config.allowUnfree = true;
+  
+  services.printing.enable = true;
 }
