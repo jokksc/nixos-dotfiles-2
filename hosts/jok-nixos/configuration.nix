@@ -1,54 +1,52 @@
-{ config, lib, pkgs, primaryUser, inputs,... }:
+{ config, lib, pkgs, myOptions, inputs, hostname,... }:
+let
+  primaryUser = myOptions.users.primaryUser;
+  # inherit hostname;
+in
 {
+
   # boot.loader.grub.enable = true;
   # boot.loader.grub.device = "/dev/sda";
   
   imports = [
-    ./locale/default.nix
+    # English language + Lithuanian locale
+    ../../modules/nixos/locale/default.nix
+    
+    # Desktop common configs
+    ../../modules/nixos/common/desktop.nix
+    
+    # NVIDIA GPU module (for Turing gpus or newer)
+    ../../modules/nixos/nvidia/turing.nix
+    
+    # Random util modules
+    ../../modules/nixos/usbmuxd.nix # iOS usb
   ];
   
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "i2c-dev" ]; # needs for ddcutil to work
-  hardware.i2c.enable = true; 
+  # boot.kernelModules = [ "i2c-dev" ]; # needs for ddcutil to work
+  # hardware.i2c.enable = true; 
   
-  networking.hostName = "jok-nixos";
+  networking.hostName = hostname;
+  # HOW TO CORRECTLY (imo) ENTER HOSTNAMES IN OTHER MODULES:
+  # { config, ...}:
+  # let
+  #   hostname = config.networking.hostname
+  # in
+  # { ... }
+  
   networking.networkmanager.enable = true;
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelModules = [ "vboxvideo" ];
   
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-  };
-  
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    powerManagement = {
-      enable = true;
-      finegrained = false; #claude said to set this to true if its a hybrid laptop gpu
-    };
-  };
-  
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.${primaryUser} = {
     isNormalUser = true;
     description = "Jokubas";
-    extraGroups = [ "networkmanager" "wheel" "i2c" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
 
   programs.firefox.enable = true;
@@ -88,7 +86,7 @@
   
   services = {
     flatpak.enable = true;
-    usbmuxd.enable = true; # ios usb thing
+    # usbmuxd.enable = true; # ios usb thing
     tailscale = {
       enable = true;
       extraSetFlags = [

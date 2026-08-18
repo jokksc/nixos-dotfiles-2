@@ -3,7 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./../../modules/nixos/common.nix
+    ./configuration.nix
+    # ./../../modules/nixos/common.nix
     ./../../modules/nixos/desktops/gnome.nix
     # ./../../home/gnome.nix
     # ./../../home/common.nix

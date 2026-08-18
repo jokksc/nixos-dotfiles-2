@@ -23,10 +23,10 @@
   };
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    primaryUser = "jokub";
-    mkHost = { homeModule, mainConfiguration, ... }: nixpkgs.lib.nixosSystem {
+    myOptions.users.primaryUser = "jokub";
+    mkHost = { homeModule, mainConfiguration, hostname, ... }: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs primaryUser; };
+      specialArgs = { inherit inputs myOptions hostname; };
       modules = [
         # hardwareConfig
         # ./modules/nixos/common.nix
@@ -54,6 +54,7 @@
       jok-nixos = mkHost {
         # hardwareConfig = ./hosts/jok-nixos/hardware-configuration.nix;
         # desktopModule = ./modules/nixos/desktops/gnome.nix;
+        hostname = "jok-nixos";
         homeModule = ./home/gnome.nix;
         mainConfiguration = ./hosts/jok-nixos/default.nix;
       };
