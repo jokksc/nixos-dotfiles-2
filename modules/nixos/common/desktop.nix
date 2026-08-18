@@ -24,4 +24,8 @@ in
   nixpkgs.config.allowUnfree = true;
   
   services.printing.enable = true;
+  
+  environment.systemPackages = with pkgs; [
+    ddcutil
+  ];
 }

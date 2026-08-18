@@ -16,4 +16,11 @@
     backend = "glx";
     fade = true;
   };
+  
+  environment.systemPackages = with pkgs; [
+    gedit
+    xwallpaper
+    rofi
+    pcmanfm 
+  ];
 }

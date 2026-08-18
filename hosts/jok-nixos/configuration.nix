@@ -12,8 +12,9 @@ in
     # systemd bootloader
     ../../modules/nixos/bootloader/default.nix
     
-    # Common programs
-    ../../modules/nixos/programs/common/default.nix
+    # Common programs + Steam
+    ../../modules/nixos/programs/common.nix
+    ../../modules/nixos/programs/gaming/default.nix
     
     # Desktop common configs
     ../../modules/nixos/common/desktop.nix
@@ -29,6 +30,7 @@ in
     ../../modules/nixos/locale/default.nix # English language + Lithuanian locale
     ../../modules/nixos/virtualisation.nix
     ../../modules/nixos/fonts/common.nix
+    ../../modules/nixos/pipewire.nix
   ];
   
   networking.hostName = hostname;

@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.zen-browser.homeModules.beta
+    ./bash.nix
   ];
   
   home.username = "jokub";
