@@ -1,6 +1,6 @@
-{ lib, config, pkgs, myOptions ...}:
+{ lib, config, pkgs, myOptions, ...}:
 let
-  primaryUser = myOptions.users.primaryUser
+  primaryUser = myOptions.users.primaryUser;
 in
 {
   services.tailscale = {

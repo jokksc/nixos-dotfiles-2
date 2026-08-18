@@ -7,7 +7,7 @@ in
   boot.kernelModules = [ "i2c-dev" ];
   hardware.i2c.enable = true; 
   users.users.${primaryUser} = {
-    extraGroups = [ "i2c" ];
+    extraGroups = [ "i2c" "networkmanager" ];
   };
   
   services.xserver = {

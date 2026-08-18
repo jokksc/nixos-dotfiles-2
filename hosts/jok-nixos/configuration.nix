@@ -9,11 +9,11 @@ in
   # boot.loader.grub.device = "/dev/sda";
   
   imports = [
+    # systemd bootloader
+    ../../modules/nixos/bootloader/default.nix
+    
     # Common programs
     ../../modules/nixos/programs/common/default.nix
-    
-    # English language + Lithuanian locale
-    ../../modules/nixos/locale/default.nix
     
     # Desktop common configs
     ../../modules/nixos/common/desktop.nix
@@ -26,14 +26,10 @@ in
     ../../modules/nixos/flatpak.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/ssh.nix
+    ../../modules/nixos/locale/default.nix # English language + Lithuanian locale
     ../../modules/nixos/virtualisation.nix
     ../../modules/nixos/fonts/common.nix
   ];
-  
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  # boot.kernelModules = [ "i2c-dev" ]; # needs for ddcutil to work
-  # hardware.i2c.enable = true; 
   
   networking.hostName = hostname;
   # HOW TO CORRECTLY (imo) ENTER HOSTNAMES IN OTHER MODULES:
@@ -42,39 +38,15 @@ in
   #   hostname = config.networking.hostname
   # in
   # { ... }
-  
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelModules = [ "vboxvideo" ];
+
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.${primaryUser} = {
     isNormalUser = true;
     description = "Jokubas";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" ];
   };
-
-  services = {
-    # flatpak.enable = true;
-    # usbmuxd.enable = true; # ios usb thing
-    # tailscale = {
-    #   enable = true;
-    #   extraSetFlags = [
-    #     "--operator=${primaryUser}"  
-    #   ];
-    # };
-  };
-
-  # fonts.packages = with pkgs; [
-  #   nerd-fonts.jetbrains-mono
-  #   jetbrains-mono
-  #   fira-code
-  #   nerd-fonts.fira-code
-  #   twemoji-color-font
-  # ];
-
   
-    
-  # virtualisation.virtualbox.guest.enable = true;
   system.stateVersion = "26.05";
 }
