@@ -42,6 +42,13 @@
         (lib.hm.gvariant.mkTuple [ "xkb" "lt" ])
        ];
      };
+     "org/gnome/shell/extensions/dash-to-dock/" = {
+       click-action = "minimize";
+       dash-max-icon-size = 48;
+     };
+     "org/gnome/shell/extensions/display-brightness-ddcutil/" = {
+       button-location = 0;
+     };
    };
 
   # gnome shell extensions managed via home-manager

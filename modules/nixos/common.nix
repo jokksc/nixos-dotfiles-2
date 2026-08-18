@@ -78,6 +78,7 @@
     ptyxis
     ddcutil
     pika-backup
+    # smile
     # usbmuxd # app for usb connection with ios?
     # using services.usbmuxd.enable instead
 #  ] ++ [
@@ -101,6 +102,7 @@
     jetbrains-mono
     fira-code
     nerd-fonts.fira-code
+    twemoji-color-font
   ];
   
   # Enable CUPS to print documents.
