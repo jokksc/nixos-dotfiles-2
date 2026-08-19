@@ -1,7 +1,7 @@
-{ lib, config, pkgs, ...}:
+{ lib, config, pkgs, unstable, ...}:
   
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with unstable; [
     llama-cpp
   ];
   
