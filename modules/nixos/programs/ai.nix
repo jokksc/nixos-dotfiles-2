@@ -2,8 +2,8 @@
   
 {
   environment.systemPackages = with pkgs; [
-  #   llama-cpp
+    llama-cpp
   ];
   
-  services.llama-cpp.enable = true;
+  # services.llama-cpp.enable = true;
 }

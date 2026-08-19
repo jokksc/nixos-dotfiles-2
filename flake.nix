@@ -2,6 +2,7 @@
   description = "NixOS from Scratch";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,24 +14,24 @@
         home-manager.follows = "home-manager";
       };
     };
- #   iloader = {
- #     url = "github:nab138/iloader";
- #   };
-    # nix-flatpak = {
-    #   url = "https://github.com/gmodena/nix-flatpak";
-    # };
-    # i'll implement this later
   };
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
   let
     myOptions.users.primaryUser = "jokub";
-    mkHost = { homeModule, mainConfiguration, hostname, ... }: nixpkgs.lib.nixosSystem {
+
+    mkHost = { homeModule, mainConfiguration, hostname, ... }:
+    let
       system = "x86_64-linux";
-      specialArgs = { inherit inputs myOptions hostname; };
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs myOptions hostname unstable; };
       modules = [
-        # hardwareConfig
-        # ./modules/nixos/common.nix
-        # desktopModule
         mainConfiguration
         home-manager.nixosModules.home-manager
         {
@@ -47,13 +48,7 @@
   in
   {
     nixosConfigurations = {
-    #   jok-nixos = mkHost {
-    #     desktopModule = ./hosts/qtile.nix;
-    #     homeModule = ./home/qtile.nix;
-    #   };
       jok-nixos = mkHost {
-        # hardwareConfig = ./hosts/jok-nixos/hardware-configuration.nix;
-        # desktopModule = ./modules/nixos/desktops/gnome.nix;
         hostname = "jok-nixos";
         homeModule = ./modules/home/gnome/default.nix;
         mainConfiguration = ./hosts/jok-nixos/default.nix;
