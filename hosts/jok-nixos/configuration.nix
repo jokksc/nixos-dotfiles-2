@@ -14,13 +14,16 @@ in
     
     # Common programs + Steam
     ../../modules/nixos/programs/common.nix
+    ../../modules/nixos/programs/common-desktop.nix
     ../../modules/nixos/programs/gaming/default.nix
+    # ../../modules/nixos/programs/ai.nix
     
     # Desktop common configs
     ../../modules/nixos/common/desktop.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
     ../../modules/nixos/nvidia/turing.nix
+    ../../modules/nixos/nvidia/cuda.nix
     
     # Random util modules
     ../../modules/nixos/usbmuxd.nix # iOS usb

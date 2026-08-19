@@ -25,15 +25,7 @@ in
 #  };
 # skipped for now, since idk how to store emails/secrets  without pushing to git repos 
   
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      btw = "echo i use nixos btw";
-#      nrs = "sudo nixos-rebuild switch";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
-      syu = "sudo nix flake update --flake ~/nixos-dotfiles-2 && sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
-    };
-  };
+ 
   programs.opencode = {
     enable = true;  
   };
