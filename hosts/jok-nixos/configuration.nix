@@ -16,7 +16,7 @@ in
     ../../modules/nixos/programs/common.nix
     ../../modules/nixos/programs/common-desktop.nix
     ../../modules/nixos/programs/gaming/default.nix
-    ../../modules/nixos/programs/ai.nix
+    # ../../modules/nixos/programs/ai.nix
     
     # Desktop common configs
     ../../modules/nixos/common/desktop.nix

@@ -11,5 +11,6 @@
     rnote
     ptyxis
     pika-backup
+    mission-center
   ];
 }

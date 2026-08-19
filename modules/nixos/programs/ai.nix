@@ -2,7 +2,7 @@
   
 {
   environment.systemPackages = with unstable; [
-    llama-cpp
+    (llama-cpp.override { cudaSupport = true; })
   ];
   
   # services.llama-cpp.enable = true;
