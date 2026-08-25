@@ -12,6 +12,6 @@
     ptyxis
     pika-backup
     mission-center
-    inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
+    # inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
   ];
 }

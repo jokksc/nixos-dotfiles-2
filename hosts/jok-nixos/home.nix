@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.zen-browser.homeModules.beta
+    inputs.flatpaks.homeManagerModules.nix-flatpak
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
     ../../modules/home/gnome/default.nix
@@ -19,6 +20,33 @@ in
   home.username = "jokub";
   home.homeDirectory = "/home/jokub";
   home.stateVersion = "26.05";
+
+  services.flatpak.remotes = [
+    {
+      name = "flathub";
+      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    }
+  ];
+
+  services.flatpak.packages = [
+    { appId = "com.brave.Browser"; origin = "flathub";}
+    "com.obsproject.Studio"
+    "com.github.PintaProject.Pinta"
+    "com.github.flxzt.rnote"
+    "net.ankiweb.Anki"
+    "ca.desrt.dconf-editor"
+    "com.github.finefindus.eyedropper"
+    "com.ranfdev.Geopard"
+    "org.localsend.localsend_app"
+    "io.gitlab.news_flash.NewsFlash"
+    "org.vinegarhq.Sober"
+    "com.stremio.Stremio"
+    "org.telegram.desktop"
+    "io.github.tanaybhomia.Whisp"
+    "page.codeberg.M23Snezhok.Vinyl"
+  ];
+
+  services.flatpak.update.onActivation = true;
   
 #  programs.git = {
 #    enable = true;
@@ -88,6 +116,8 @@ in
 #    recursive = true;
 #  };
   
+  
+
   home.packages = with pkgs; [
     bat
     atool
@@ -103,8 +133,9 @@ in
     localsend
     vesktop
     prismlauncher
-    pinta
-    rnote
+    spotify
+    # pinta
+    # rnote
     # ptyxis
   ];
 }

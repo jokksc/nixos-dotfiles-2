@@ -15,15 +15,16 @@
         home-manager.follows = "home-manager";
       };
     };
-    helix.url = "github:helix-editor/helix/master";
+    # helix.url = "github:helix-editor/helix/master";
     # pi-nix = {
     #   url = "github:cyprx/pi.nix";
     #   # nixpkgs.follows = "nixpkgs";
     # };
     # BULLSHIT
+    flatpaks.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flatpaks, ... }@inputs:
   let
     myOptions.users.primaryUser = "jokub";
 
