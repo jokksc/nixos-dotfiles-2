@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.zen-browser.homeModules.beta
+    inputs.pi-nix.homeManagerModules.default
     ./bash.nix
   ];
   
@@ -24,7 +25,11 @@ in
 #    userEmail = ""
 #  };
 # skipped for now, since idk how to store emails/secrets  without pushing to git repos 
-  
+  programs.pi-coding-agent = {
+    enable = true;
+    # extensions = [ ];
+    # https://github.com/cyprx/pi.nix
+  };
  
   programs.opencode = {
     enable = true;  
