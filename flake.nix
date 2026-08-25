@@ -15,6 +15,7 @@
         home-manager.follows = "home-manager";
       };
     };
+    helix.url = "github:helix-editor/helix/master";
     # pi-nix = {
     #   url = "github:cyprx/pi.nix";
     #   # nixpkgs.follows = "nixpkgs";

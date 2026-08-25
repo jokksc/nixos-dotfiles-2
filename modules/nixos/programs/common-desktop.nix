@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ...}:
+{ lib, config, pkgs, inputs, ...}:
   
 {
   programs.firefox.enable = true;
@@ -12,5 +12,6 @@
     ptyxis
     pika-backup
     mission-center
+    inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
   ];
 }
