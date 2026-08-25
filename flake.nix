@@ -15,6 +15,11 @@
         home-manager.follows = "home-manager";
       };
     };
+    # pi-nix = {
+    #   url = "github:cyprx/pi.nix";
+    #   # nixpkgs.follows = "nixpkgs";
+    # };
+    # BULLSHIT
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
