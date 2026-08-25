@@ -47,7 +47,11 @@ in
   ];
 
   services.flatpak.update.onActivation = true;
-  
+  services.flatpak.update.auto = {
+    enable = true;
+    onCalendar = "daily";
+  };
+
 #  programs.git = {
 #    enable = true;
 #    userName = "jokksc"
