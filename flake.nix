@@ -47,7 +47,7 @@
             useUserPackages = true;
             backupFileExtension = "backup";
             extraSpecialArgs = { inherit inputs; };
-            users.jokub = { imports = [ ./modules/home/common.nix homeModule ]; };
+            users.jokub = { imports = [ homeModule ]; };
           };
         }
       ];
@@ -57,7 +57,7 @@
     nixosConfigurations = {
       jok-nixos = mkHost {
         hostname = "jok-nixos";
-        homeModule = ./modules/home/gnome/default.nix;
+        homeModule = ./hosts/jok-nixos/home.nix;
         mainConfiguration = ./hosts/jok-nixos/default.nix;
       };
     };
