@@ -33,10 +33,10 @@ in
   # };
   # BULLSHITTTT
  
-  home.sessionVariables = {
-    PI_EXTENSIONS = "all";
-    PI_DISABLE_EXTENSIONS = "rtk"; 
-  };
+  # home.sessionVariables = {
+  #   PI_EXTENSIONS = "all";
+  #   PI_DISABLE_EXTENSIONS = "rtk"; 
+  # };
 
   programs.opencode = {
     enable = true;  

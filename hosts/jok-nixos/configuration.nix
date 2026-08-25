@@ -34,6 +34,9 @@ in
     ../../modules/nixos/virtualisation.nix
     ../../modules/nixos/fonts/common.nix
     ../../modules/nixos/pipewire.nix
+
+    # Auto gc
+    ../../modules/nixos/autogc.nix
   ];
   
   networking.hostName = hostname;
