@@ -7,8 +7,8 @@
     vscode
     vscodium
     kdePackages.filelight
-    pinta
-    rnote
+    # pinta
+    # rnote
     ptyxis
     pika-backup
     mission-center

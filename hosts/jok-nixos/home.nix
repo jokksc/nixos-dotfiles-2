@@ -103,6 +103,8 @@ in
     localsend
     vesktop
     prismlauncher
+    pinta
+    rnote
     # ptyxis
   ];
 }
