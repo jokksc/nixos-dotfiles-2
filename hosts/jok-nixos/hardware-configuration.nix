@@ -24,6 +24,12 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/run/media/jokub/Raid 2" =
+    { device = "/dev/disk/by-uuid/123F-C4EE";
+      fsType = "exfat";
+      options = [ "uid=1000" "gid=100" "umask=022" "nofail"];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/573f1542-1bd7-4b8a-96f4-8797f1a69b4a"; }
     ];
