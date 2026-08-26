@@ -1,5 +1,6 @@
 { config, pkgs, inputs, ...}:
 let
+  fromFlathub = appId: { inherit appId; origin = "flathub"; };
 #  secrets = import ./secrets.nix
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -26,10 +27,13 @@ in
       name = "flathub";
       location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
     }
+    {
+      name = "gnome-nightly";
+      location = "https://nightly.gnome.org/gnome-nightly.flatpakrepo";
+    }
   ];
 
-  services.flatpak.packages = [
-    { appId = "com.brave.Browser"; origin = "flathub";}
+  services.flatpak.packages = (map fromFlathub [
     "com.obsproject.Studio"
     "com.github.PintaProject.Pinta"
     "com.github.flxzt.rnote"
@@ -44,6 +48,8 @@ in
     "org.telegram.desktop"
     "io.github.tanaybhomia.Whisp"
     "page.codeberg.M23Snezhok.Vinyl"
+  ]) ++ [
+    # { appId = "org.gnome.Boxes.Devel"; origin = "gnome-nightly";}
   ];
 
   services.flatpak.update.onActivation = true;
