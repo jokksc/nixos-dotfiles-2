@@ -26,9 +26,14 @@
     };
 
     # ⇩ EDIT ME: name your outputs (`niri msg outputs` lists them) for scale/pos.
-    # outputs."eDP-1" = {
+    outputs."DP-1" = {
     #   scale = local.monitorScale;
-    # };
+      mode = {
+        width = 2560;
+        height = 1440;
+        refresh = 165.080;
+      };
+    };
 
     layout = {
       gaps = 12;
@@ -62,7 +67,7 @@
     # actions take `{ }`; spawn takes a string or a list of argv strings.
     binds = {
       # Launchers
-      "Mod+Return".action.spawn = "ghostty";
+      "Mod+Return".action.spawn = "alacritty";
       # Noctalia v5 IPC: `noctalia msg <command>` (the old `ipc call` form and
       # the `noctalia-shell` binary are gone). The launcher is a named panel.
       "Mod+Space".action.spawn = [

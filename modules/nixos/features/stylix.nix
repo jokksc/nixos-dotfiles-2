@@ -28,17 +28,29 @@
         package = pkgs.maple-mono.NF;
         name = "Maple Mono NF";
       };
+      # sansSerif = {
+      #   package = pkgs.noto-fonts;
+      #   name = "Noto Sans";
+      # };
+      # serif = {
+      #   package = pkgs.noto-fonts;
+      #   name = "Noto Serif";
+      # };
+      # emoji = {
+      #   package = pkgs.noto-fonts-color-emoji;
+      #   name = "Noto Color Emoji";
+      # };
       sansSerif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Sans";
+        package = pkgs.maple-mono.NF;
+        name = "Maple Mono NF";
       };
       serif = {
-        package = pkgs.noto-fonts;
-        name = "Noto Serif";
+        package = pkgs.maple-mono.NF;
+        name = "Maple Mono NF";
       };
       emoji = {
-        package = pkgs.noto-fonts-color-emoji;
-        name = "Noto Color Emoji";
+        package = pkgs.maple-mono.NF;
+        name = "Maple Mono NF";
       };
 
       sizes = {
