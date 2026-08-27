@@ -5,7 +5,7 @@ let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
-    alacritty = "alacritty";
+    # alacritty = "alacritty";
 #    nvim = "nvim";
   };
 in    
@@ -16,6 +16,8 @@ in
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
     ../../modules/home/gnome/default.nix
+    ../../modules/home/niri.nix
+    ../../modules/home/noctalia.nix
   ];
   
   home.username = "jokub";

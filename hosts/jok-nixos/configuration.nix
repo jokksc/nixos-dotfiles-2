@@ -20,7 +20,7 @@ in
     
     # Desktop common configs
     ../../modules/nixos/desktops/gnome.nix
-    # ../../modules/nixos/desktops/niri.nix
+    ../../modules/nixos/desktops/niri.nix
     ../../modules/nixos/common/desktop.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
@@ -55,7 +55,7 @@ in
   users.users.${primaryUser} = {
     isNormalUser = true;
     description = "Jokubas";
-    extraGroups = [ "wheel" "libvirtd" "kvm" ];
+    extraGroups = [ "wheel" ];
   };
   
   system.stateVersion = "26.05";

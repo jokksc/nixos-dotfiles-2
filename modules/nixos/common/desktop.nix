@@ -7,12 +7,22 @@ in
   boot.kernelModules = [ "i2c-dev" ];
   hardware.i2c.enable = true; 
   users.users.${primaryUser} = {
-    extraGroups = [ "i2c" "networkmanager" ];
+    extraGroups = [ "i2c" "networkmanager" "video" "audio" "input" "libvirtd" "kvm" ];
   };
   
   services.xserver = {
     enable = true;
   };
+
+  nix.settings.extra-substituters = [
+    "https://niri.cachix.org"
+    "https://noctalia.cachix.org"
+  ];
+
+  nix.settings.extra-trusted-public-keys = [
+    "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+  ];
   
   hardware.graphics = {
     enable = true;
