@@ -15,17 +15,28 @@
         home-manager.follows = "home-manager";
       };
     };
-    # helix.url = "github:helix-editor/helix/master";
-    # pi-nix = {
-    #   url = "github:cyprx/pi.nix";
-    #   # nixpkgs.follows = "nixpkgs";
-    # };
-    # BULLSHIT
     flatpaks.url = "github:gmodena/nix-flatpak/?ref=latest";
+    # i got these flakes from https://github.com/floatdrop/nnn-starter/blob/main/flake.nix
+    # also dont pin noctalia to nixpkgs, cuz otherwise it would miss cache
+    niri.url = "github:sodiboo/niri-flake";
+    noctalia.url = "github:noctalia-dev/noctalia-shell/cachix";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flatpaks, ... }@inputs:
-  let
+  outputs = { 
+    self, 
+    nixpkgs, 
+    nixpkgs-unstable, 
+    home-manager, 
+    flatpaks, 
+    niri, 
+    noctalia, 
+    stylix, 
+    ... 
+  }@inputs: let
     myOptions.users.primaryUser = "jokub";
 
     mkHost = { homeModule, mainConfiguration, hostname, ... }:

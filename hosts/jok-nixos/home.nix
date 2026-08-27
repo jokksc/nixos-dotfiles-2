@@ -48,6 +48,7 @@ in
     "org.telegram.desktop"
     "io.github.tanaybhomia.Whisp"
     "page.codeberg.M23Snezhok.Vinyl"
+    "de.swsnr.turnon"
   ]) ++ [
     # { appId = "org.gnome.Boxes.Devel"; origin = "gnome-nightly";}
   ];
