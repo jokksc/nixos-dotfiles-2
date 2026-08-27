@@ -19,8 +19,8 @@ in
     ../../modules/nixos/programs/ai.nix
     
     # Desktop common configs
-    # ../../modules/nixos/desktops/gnome.nix
-    ../../modules/nixos/desktops/niri.nix
+    ../../modules/nixos/desktops/gnome.nix
+    # ../../modules/nixos/desktops/niri.nix
     ../../modules/nixos/common/desktop.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
