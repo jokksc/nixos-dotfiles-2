@@ -4,7 +4,7 @@
   imports = [
     inputs.niri.nixosModules.niri
     inputs.noctalia.nixosModules.default
-    stylix.nixosModules.stylix
+    inputs.stylix.nixosModules.stylix
     ../features/noctalia.nix
     ../features/stylix.nix
   ];
