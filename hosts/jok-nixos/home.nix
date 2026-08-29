@@ -16,8 +16,8 @@ in
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
     ../../modules/home/gnome/default.nix
-    ../../modules/home/niri.nix
-    ../../modules/home/noctalia.nix
+    # ../../modules/home/niri.nix
+    # ../../modules/home/noctalia.nix
   ];
   
   home.username = "jokub";

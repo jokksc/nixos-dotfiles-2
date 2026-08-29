@@ -20,7 +20,7 @@
          "vesktop.desktop"
          "org.telegram.desktop.desktop"
          "obsidian.desktop"
-         "com.spotify.Client.desktop"
+         "spotify.desktop"
          "com.stremio.Stremio.desktop"
          "steam.desktop"
          "org.prismlauncher.PrismLauncher.desktop"
