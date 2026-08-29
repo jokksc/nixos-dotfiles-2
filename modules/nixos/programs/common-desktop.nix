@@ -5,13 +5,14 @@
   
   environment.systemPackages = with pkgs; [
     vscode
-    vscodium
+    # vscodium
     kdePackages.filelight
     # pinta
     # rnote
     ptyxis
     pika-backup
     mission-center
+    resources
     # inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
   ];
 }
