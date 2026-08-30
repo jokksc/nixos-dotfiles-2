@@ -2,6 +2,10 @@
   
 {
   programs.firefox.enable = true;
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
   
   environment.systemPackages = with pkgs; [
     vscode

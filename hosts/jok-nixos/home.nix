@@ -43,7 +43,7 @@ in
     "ca.desrt.dconf-editor"
     "com.github.finefindus.eyedropper"
     "com.ranfdev.Geopard"
-    "org.localsend.localsend_app"
+    # "org.localsend.localsend_app"
     "io.gitlab.news_flash.NewsFlash"
     "org.vinegarhq.Sober"
     "com.stremio.Stremio"
