@@ -17,6 +17,7 @@
     pika-backup
     mission-center
     resources
+    blackbox-terminal
     # inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
   ];
 }
