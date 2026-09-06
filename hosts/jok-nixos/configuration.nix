@@ -36,6 +36,7 @@ in
     ../../modules/nixos/virtualisation.nix
     ../../modules/nixos/fonts/common.nix
     ../../modules/nixos/pipewire.nix
+    ../../modules/nixos/waydroid.nix
 
     # Auto gc
     ../../modules/nixos/autogc.nix
