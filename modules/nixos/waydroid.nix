@@ -1,3 +1,5 @@
+{ lib, config, pkgs, ...}:
+
 {
   virtualisation.waydroid.enable = true;
   # Newer kernel versions may need
