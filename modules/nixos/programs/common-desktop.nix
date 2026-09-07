@@ -18,6 +18,7 @@
     mission-center
     resources
     blackbox-terminal
+    python314
     # inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
   ];
 }
