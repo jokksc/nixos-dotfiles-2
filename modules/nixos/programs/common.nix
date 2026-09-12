@@ -10,6 +10,7 @@
     btop  
     git 
     pfetch
+    openssl
   ];
   
 }
