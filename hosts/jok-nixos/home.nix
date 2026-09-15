@@ -13,6 +13,7 @@ in
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.flatpaks.homeManagerModules.nix-flatpak
+    inputs.stylix.homeModules.stylix
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
     ../../modules/home/gnome.nix
@@ -129,8 +130,6 @@ in
 #    recursive = true;
 #  };
   
-  
-
   home.packages = with pkgs; [
     bat
     atool
@@ -151,4 +150,37 @@ in
     # rnote
     # ptyxis
   ];
+
+  stylix = {
+    opacity.terminal = 0.95;
+
+    fonts = {
+      monospace = {
+        name = "Maple Mono NF";
+      };
+      # sansSerif = {
+      #   name = "Noto Sans";
+      # };
+      # serif = {
+      #   name = "Noto Serif";
+      # };
+      # emoji = {
+      #   name = "Noto Color Emoji";
+      # };
+      sansSerif = {
+        name = "Maple Mono NF";
+      };
+      serif = {
+        name = "Maple Mono NF";
+      };
+      emoji = {
+        name = "Maple Mono NF";
+      };
+      sizes = {
+        terminal = 12;
+        applications = 11;
+        desktop = 11;
+        popups = 11;
+      };
+  }
 }
