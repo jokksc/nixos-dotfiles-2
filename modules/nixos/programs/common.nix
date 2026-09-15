@@ -1,7 +1,6 @@
 { lib, config, pkgs, inputs, myOptions, ...}:
   
 {
-
   nix.settings.extra-substituters = [
     "https://niri.cachix.org"
     "https://noctalia.cachix.org"
