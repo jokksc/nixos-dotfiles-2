@@ -11,6 +11,7 @@
     git 
     pfetch
     openssl
+    oxker
   ];
   
 }
