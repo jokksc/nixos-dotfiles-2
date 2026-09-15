@@ -1,17 +1,9 @@
 { config, lib, pkgs, myOptions, inputs, hostname,... }:
 let
   primaryUser = myOptions.users.primaryUser;
-  # inherit hostname;
 in
 {
-
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.device = "/dev/sda";
-  
   imports = [
-    # systemd bootloader
-    ../../modules/nixos/bootloader/default.nix
-    
     # Common programs + Steam
     ../../modules/nixos/programs/common.nix
     ../../modules/nixos/programs/common-desktop.nix
@@ -20,8 +12,6 @@ in
     
     # Desktop common configs
     ../../modules/nixos/programs/gnome.nix
-    
-    ../../modules/nixos/common/desktop.nix
 
     # inputs.noctalia.nixosModules.default
     # inputs.stylix.nixosModules.stylix
@@ -38,7 +28,7 @@ in
     ../../modules/nixos/flatpak.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/ssh.nix
-    ../../modules/nixos/locale/default.nix # English language + Lithuanian locale
+    ../../modules/nixos/locale.nix # English language + Lithuanian locale
     ../../modules/nixos/virtualisation.nix
     ../../modules/nixos/fonts/common.nix
     ../../modules/nixos/pipewire.nix
@@ -60,11 +50,11 @@ in
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  users.users.${primaryUser} = {
-    isNormalUser = true;
-    description = "Jokubas";
-    extraGroups = [ "wheel" ];
-  };
+  # users.users.${primaryUser} = {
+  #   isNormalUser = true;
+  #   description = "Jokubas";
+  #   extraGroups = [ "wheel" ];
+  # };
   
   system.stateVersion = "26.05";
 }
