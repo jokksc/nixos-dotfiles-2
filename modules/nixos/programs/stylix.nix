@@ -14,7 +14,7 @@
     # Kanagawa, vendored in-repo so the build never depends on whatever version
     # of `base16-schemes` happens to be pinned. To use an upstream scheme
     # instead: stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-    base16Scheme = ../../../dotfiles/stylix/kanagawa.yaml;
+    base16Scheme = ../../../dotfiles/stylix/ashes.yaml;
 
     # "Static mind, like the sea" (静心如海) — a meditating pepe before Hokusai's
     # Great Wave off Kanagawa, vendored in-repo (pngquant-optimized).
@@ -38,12 +38,12 @@
       # serif     = { name = "Noto Serif"; };
       # emoji     = { name = "Noto Color Emoji"; };
 
-      sizes = {
-        terminal     = 12;
-        applications = 11;
-        desktop      = 11;
-        popups       = 11;
-      };
+      # sizes = {
+      #   terminal     = 12;
+      #   applications = 11;
+      #   desktop      = 11;
+      #   popups       = 11;
+      # };
     };
   };
 }

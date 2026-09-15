@@ -141,7 +141,7 @@ in
     ripgrep # used for telescope to work?
     # nodejs
     # gss # for compilation
-    obsidian
+    # obsidian
     localsend
     vesktop
     prismlauncher
@@ -151,11 +151,32 @@ in
     # ptyxis
   ];
 
+  programs.obsidian = {
+    enable = true;
+    package = pkgs.obsidian;
+    # vaults."Documents/Obsidian Vaults/stylix" = {
+    #   enable = true;
+    #   settings.appearance = {
+    #     "baseFontSize" = 16;
+    #     "showRibbon" = false;
+    #     # "enabledCssSnippets" = [
+    #     #   "Banner"
+    #     #   "Vault Tweaks"
+    #     #   "style-settings"
+    #     # ];
+    #     "nativeMenus" = false;
+    #     "cssTheme" = "Minimal";
+    #     "slidingSidebar" = true;
+    #     "floatingNavigation" = true;
+    #   };
+    # };
+  };
+
   programs.vscode.enable = true;
 
   stylix.targets = {
-    obsidian.enable = true;
-    obsidian.vaultNames = [ "Vault 3 Sync" ];
+    obsidian.enable = false;
+    # obsidian.vaultNames = [ "Vault 3 Sync" ];
     obsidian.colors.enable = true;
     obsidian.fonts.enable = true;
     obsidian.polarity.enable = true;
