@@ -19,9 +19,15 @@ in
     ../../modules/nixos/programs/ai.nix
     
     # Desktop common configs
-    ../../modules/nixos/desktops/gnome.nix
-    # ../../modules/nixos/desktops/niri.nix
+    ../../modules/nixos/programs/gnome.nix
+    
     ../../modules/nixos/common/desktop.nix
+
+    # inputs.noctalia.nixosModules.default
+    # inputs.stylix.nixosModules.stylix
+    # ../../modules/nixos/programs/noctalia.nix
+    # ../../modules/nixos/programs/stylix.nix
+    # ../../modules/nixos/programs/niri.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
     ../../modules/nixos/nvidia/turing.nix

@@ -3,10 +3,6 @@
 {
   imports = [
     inputs.niri.nixosModules.niri
-    inputs.noctalia.nixosModules.default
-    inputs.stylix.nixosModules.stylix
-    ../features/noctalia.nix
-    ../features/stylix.nix
   ];
 
   programs.niri.enable = true;
