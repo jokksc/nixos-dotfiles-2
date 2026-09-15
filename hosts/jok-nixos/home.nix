@@ -15,7 +15,7 @@ in
     inputs.flatpaks.homeManagerModules.nix-flatpak
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
-    ../../modules/home/gnome/default.nix
+    ../../modules/home/gnome.nix
     # ../../modules/home/niri.nix
     # ../../modules/home/noctalia.nix
   ];
