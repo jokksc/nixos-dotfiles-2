@@ -13,7 +13,7 @@ in
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.flatpaks.homeManagerModules.nix-flatpak
-    inputs.stylix.homeModules.stylix
+    # inputs.stylix.homeModules.stylix
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
     ../../modules/home/gnome.nix
@@ -151,37 +151,14 @@ in
     # ptyxis
   ];
 
-  stylix = {
-    opacity.terminal = 0.95;
+  programs.vscode.enable = true;
 
-    fonts = {
-      monospace = {
-        name = "Maple Mono NF";
-      };
-      # sansSerif = {
-      #   name = "Noto Sans";
-      # };
-      # serif = {
-      #   name = "Noto Serif";
-      # };
-      # emoji = {
-      #   name = "Noto Color Emoji";
-      # };
-      sansSerif = {
-        name = "Maple Mono NF";
-      };
-      serif = {
-        name = "Maple Mono NF";
-      };
-      emoji = {
-        name = "Maple Mono NF";
-      };
-      sizes = {
-        terminal = 12;
-        applications = 11;
-        desktop = 11;
-        popups = 11;
-      };
-    };
+  stylix.targets = {
+    obsidian.enable = true;
+    obsidian.vaultNames = [ "Vault 3 Sync" ];
+    obsidian.colors.enable = true;
+    obsidian.fonts.enable = true;
+    obsidian.polarity.enable = true;
+    vscode.enable = true;
   };
 }

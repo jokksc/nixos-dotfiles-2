@@ -59,6 +59,7 @@
             useUserPackages = true;
             backupFileExtension = "backup";
             extraSpecialArgs = { inherit inputs; };
+            # sharedModules = [ inputs.stylix.homeModules.stylix ];
             users.jokub = { imports = [ homeModule ]; };
           };
         }

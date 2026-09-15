@@ -1,6 +1,12 @@
-{pkgs, ...}: {
+{ lib, config, pkgs, inputs, ... }:
+{
   # One palette to rule them all. Stylix derives colors for niri, noctalia,
   # ghostty, bat, btop, neovim, GTK/Qt and more from a single base16 scheme.
+
+  imports = [
+    inputs.stylix.nixosModules.stylix
+  ];
+
   stylix = {
     enable = true;
     polarity = "dark";
@@ -24,40 +30,19 @@
     };
 
     fonts = {
-      monospace = {
-        package = pkgs.maple-mono.NF;
-        name = "Maple Mono NF";
-      };
-      # sansSerif = {
-      #   package = pkgs.noto-fonts;
-      #   name = "Noto Sans";
-      # };
-      # serif = {
-      #   package = pkgs.noto-fonts;
-      #   name = "Noto Serif";
-      # };
-      # emoji = {
-      #   package = pkgs.noto-fonts-color-emoji;
-      #   name = "Noto Color Emoji";
-      # };
-      sansSerif = {
-        package = pkgs.maple-mono.NF;
-        name = "Maple Mono NF";
-      };
-      serif = {
-        package = pkgs.maple-mono.NF;
-        name = "Maple Mono NF";
-      };
-      emoji = {
-        package = pkgs.maple-mono.NF;
-        name = "Maple Mono NF";
-      };
+      monospace = { name = "Maple Mono NF"; };
+      sansSerif = { name = "Maple Mono NF"; };
+      serif     = { name = "Maple Mono NF"; };
+      emoji     = { name = "Maple Mono NF"; };
+      # sansSerif = { name = "Noto Sans"; };
+      # serif     = { name = "Noto Serif"; };
+      # emoji     = { name = "Noto Color Emoji"; };
 
       sizes = {
-        terminal = 12;
+        terminal     = 12;
         applications = 11;
-        desktop = 11;
-        popups = 11;
+        desktop      = 11;
+        popups       = 11;
       };
     };
   };
