@@ -28,6 +28,7 @@
     pfetch
     openssl
     oxker
+    nix-output-monitor
   ];
   
 }

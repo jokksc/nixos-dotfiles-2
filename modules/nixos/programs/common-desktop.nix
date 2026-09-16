@@ -43,6 +43,8 @@ in
     blackbox-terminal
     python314
     ddcutil
+    vicinae
+    cbonsai
     # inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
   ];
 }
