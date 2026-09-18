@@ -18,6 +18,7 @@ in
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
     ../../modules/home/gnome.nix
+    ../../modules/home/vscode.nix
     # ../../modules/home/niri.nix
     # ../../modules/home/noctalia.nix
   ];
@@ -171,20 +172,6 @@ in
     #     "floatingNavigation" = true;
     #   };
     # };
-  };
-
-  programs.vscode = {
-    enable = true;
-    userSettings = {
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nixd";
-    };
-    extensions = with pkgs.vscode-extensions; [
-      jnoortheen.nix-ide
-      ms-vscode.remote-explorer
-      ms-vscode-remote.remote-ssh
-      ms-vscode-remote.remote-ssh-edit
-    ];
   };
 
   stylix.targets = {
