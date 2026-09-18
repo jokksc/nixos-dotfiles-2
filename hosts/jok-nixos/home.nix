@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ...}:
+{ config, pkgs, inputs, myOptions, ...}:
 let
   fromFlathub = appId: { inherit appId; origin = "flathub"; };
 #  secrets = import ./secrets.nix
@@ -8,6 +8,7 @@ let
     # alacritty = "alacritty";
 #    nvim = "nvim";
   };
+  primaryUser = myOptions.users.primaryUser;
 in    
 {
   imports = [

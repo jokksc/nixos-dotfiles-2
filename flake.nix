@@ -58,7 +58,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "backup";
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs myOptions; };
             # sharedModules = [ inputs.stylix.homeModules.stylix ];
             users.jokub = { imports = [ homeModule ]; };
           };
