@@ -173,7 +173,19 @@ in
     # };
   };
 
-  programs.vscode.enable = true;
+  programs.vscode = {
+    enable = true;
+    userSettings = {
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nixd";
+    };
+    extensions = with pkgs.vscode-extensions; [
+      jnoortheen.nix-ide
+      ms-vscode.remote-explorer
+      ms-vscode-remote.remote-ssh
+      ms-vscode-remote.remote-ssh-edit
+    ];
+  };
 
   stylix.targets = {
     obsidian.enable = false;
