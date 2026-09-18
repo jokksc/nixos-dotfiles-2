@@ -15,7 +15,7 @@ in
 
     # inputs.noctalia.nixosModules.default
     # ../../modules/nixos/programs/noctalia.nix
-    ../../modules/nixos/programs/stylix.nix
+    # ../../modules/nixos/programs/stylix.nix
     # ../../modules/nixos/programs/niri.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)

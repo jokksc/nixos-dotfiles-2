@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, myOptions, ...}:
+{ config, pkgs, inputs, ...}:
 let
   fromFlathub = appId: { inherit appId; origin = "flathub"; };
 #  secrets = import ./secrets.nix
@@ -8,7 +8,7 @@ let
     # alacritty = "alacritty";
 #    nvim = "nvim";
   };
-  primaryUser = myOptions.users.primaryUser;
+  # primaryUser = inputs.myOptions.users.primaryUser;
 in    
 {
   imports = [
@@ -19,6 +19,7 @@ in
     ../../modules/home/bash.nix
     ../../modules/home/gnome.nix
     ../../modules/home/vscode.nix
+    ../../modules/home/stylix.nix
     # ../../modules/home/niri.nix
     # ../../modules/home/noctalia.nix
   ];
@@ -172,14 +173,5 @@ in
     #     "floatingNavigation" = true;
     #   };
     # };
-  };
-
-  stylix.targets = {
-    obsidian.enable = false;
-    # obsidian.vaultNames = [ "Vault 3 Sync" ];
-    obsidian.colors.enable = true;
-    obsidian.fonts.enable = true;
-    obsidian.polarity.enable = true;
-    vscode.enable = true;
   };
 }
