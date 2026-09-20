@@ -48,6 +48,16 @@ in
 
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+  
+  environment.systemPackages = with pkgs; [
+    # code-cursor
+    # open-webui
+    #pi-coding-agent
+  ];
+  
 
   # users.users.${primaryUser} = {
   #   isNormalUser = true;

@@ -1,0 +1,9 @@
+keys:
+  - &admin_jokub age1u3p2un9ut28lrqzq9cqc0p3pelewn9llthytv9g6tdyv9tfaypgsx7qj4n
+  - &host_jok-nixos age18pttku9wjqwxx09vq0c34vz5epvy9t8rsfce977xxprpkl0tfduq5240su
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *admin_jokub
+          - *host_jok-nixos

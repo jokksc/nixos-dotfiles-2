@@ -14,6 +14,7 @@ in
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.flatpaks.homeManagerModules.nix-flatpak
+    inputs.sops-nix.homeModules.sops
     # inputs.stylix.homeModules.stylix
     # inputs.pi-nix.homeManagerModules.default
     ../../modules/home/bash.nix
@@ -85,7 +86,26 @@ in
   # };
 
   programs.opencode = {
-    enable = true;  
+    enable = true;
+    # skills = ../../dotfiles/skills
+    web = {
+      enable = true;
+      extraArgs = [
+        "--port" "4096"
+        "--hostname" "0.0.0.0"
+      ];
+    };
+  };
+
+  sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  sops.defaultSopsFile = ../../secrets/brave-search.yaml;
+  sops.secrets.brave_api_key = { };
+
+  programs.opencode.settings.mcp."brave-search" = {
+    type = "local";
+    command = [ "npx" "-y" "@brave/brave-search-mcp" ];
+    enabled = true;
+    environment.BRAVE_API_KEY = "{file:${config.home.homeDirectory}/.config/sops-nix/secrets/brave_api_key}";
   };
   
   programs.zen-browser = {
@@ -142,7 +162,7 @@ in
     nixd # switched to this
     nixpkgs-fmt
     ripgrep # used for telescope to work?
-    # nodejs
+    nodejs
     # gss # for compilation
     # obsidian
     localsend
@@ -152,6 +172,7 @@ in
     # pinta
     # rnote
     # ptyxis
+    wl-clipboard
   ];
 
   programs.obsidian = {

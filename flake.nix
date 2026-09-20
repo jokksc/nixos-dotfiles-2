@@ -24,6 +24,10 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { 
@@ -35,6 +39,7 @@
     niri, 
     noctalia, 
     stylix, 
+    sops-nix,
     ... 
   }@inputs: let
     myOptions.users.primaryUser = "jokub";
@@ -53,6 +58,7 @@
       modules = [
         mainConfiguration
         home-manager.nixosModules.home-manager
+        sops-nix.nixosModules.sops
         {
           home-manager = {
             useGlobalPkgs = true;
