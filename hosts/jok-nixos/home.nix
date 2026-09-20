@@ -19,7 +19,7 @@ in
     ../../modules/home/bash.nix
     ../../modules/home/gnome.nix
     ../../modules/home/vscode.nix
-    ../../modules/home/stylix.nix
+    # ../../modules/home/stylix.nix
     # ../../modules/home/niri.nix
     # ../../modules/home/noctalia.nix
   ];
