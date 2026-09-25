@@ -56,6 +56,10 @@ in
     # code-cursor
     # open-webui
     #pi-coding-agent
+    uv
+    ghostty
+    t3code
+    zsh
   ];
   
 
