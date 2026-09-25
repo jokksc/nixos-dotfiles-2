@@ -17,7 +17,8 @@ in
     inputs.sops-nix.homeModules.sops
     # inputs.stylix.homeModules.stylix
     # inputs.pi-nix.homeManagerModules.default
-    ../../modules/home/bash.nix
+    # ../../modules/home/bash.nix
+    ../../modules/home/zsh.nix
     ../../modules/home/gnome.nix
     ../../modules/home/vscode.nix
     # ../../modules/home/stylix.nix

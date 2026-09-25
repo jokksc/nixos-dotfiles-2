@@ -61,7 +61,6 @@ in
     t3code
     zsh
   ];
-  
 
   # users.users.${primaryUser} = {
   #   isNormalUser = true;
