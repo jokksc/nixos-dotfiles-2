@@ -4,8 +4,8 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestions.enable = true;
-    syntax-highlighting.enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
     shellAliases = {
       btw = "echo i use nixos btw";
@@ -13,6 +13,13 @@
       syu = "sudo nix flake update --flake ~/nixos-dotfiles-2 && sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
     };
 
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ 
+        "git" 
+      ];
+      theme = "robbyrussell";
+    };
     # initExtra = ''
     #   export PATH="$HOME/.local/share/pi-node/current/bin:$PATH"
     # '';

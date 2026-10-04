@@ -175,6 +175,8 @@ in
     # ptyxis
     wl-clipboard
   ];
+  
+  programs.fzf.enable = true;
 
   programs.obsidian = {
     enable = true;

@@ -12,21 +12,21 @@
        button-layout = "appmenu:minimize,maximize,close";
      };
      "org/gnome/shell" = {
-       favorite-apps = [
-         "org.gnome.Nautilus.desktop"
-         "zen-beta.desktop"
-         "org.gnome.Console.desktop"
-         "org.gnome.Ptyxis.desktop"
-         "vesktop.desktop"
-         "org.telegram.desktop.desktop"
-         "obsidian.desktop"
-         "spotify.desktop"
-         "com.stremio.Stremio.desktop"
-         "steam.desktop"
-         "org.prismlauncher.PrismLauncher.desktop"
-         "io.github.kolunmi.Bazaar.desktop"
-         "org.gnome.Settings.desktop"
-       ];
+     #   favorite-apps = [
+     #     "org.gnome.Nautilus.desktop"
+     #     "zen-beta.desktop"
+     #     "org.gnome.Console.desktop"
+     #     "org.gnome.Ptyxis.desktop"
+     #     "vesktop.desktop"
+     #     "org.telegram.desktop.desktop"
+     #     "obsidian.desktop"
+     #     "spotify.desktop"
+     #     "com.stremio.Stremio.desktop"
+     #     "steam.desktop"
+     #     "org.prismlauncher.PrismLauncher.desktop"
+     #     "io.github.kolunmi.Bazaar.desktop"
+     #     "org.gnome.Settings.desktop"
+     #   ];
        always-show-log-out = true;
      };
      "org/gnome/desktop/peripherals/mouse" = {

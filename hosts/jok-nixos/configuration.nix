@@ -58,9 +58,24 @@ in
     #pi-coding-agent
     uv
     ghostty
-    t3code
     zsh
+    uxplay
+    # (t3code.override {
+    #   t3code-unwrapped = t3code.unwrapped.overrideAttrs (old: {
+    #     version = "0.0.45";
+    #     src = old.src.override {
+    #       tag = "v0.0.45";
+    #       hash = "sha256-8drTHjFqa2vJ96jhpRZXmNbtbXtKk1q40jOEp9dohNc=";
+    #     };
+    #     pnpmDeps = old.pnpmDeps.override {
+    #       hash = "sha256-2dGEHOQrnidTei54NlZTJh5u5/i810hb2LddK4XfUNQ=";
+    #     };
+    #   });
+    # })
+    t3code
   ];
+  
+  virtualisation.docker.enableOnBoot = false;
 
   # users.users.${primaryUser} = {
   #   isNormalUser = true;
