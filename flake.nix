@@ -85,6 +85,7 @@
       };
       jokub-vm = mkHost {
         hostname = "jokub-vm";
+        homeModule = ./hosts/vm/home.nix;
         mainConfiguration = ./hosts/vm/configuration.nix;
       };
     };
