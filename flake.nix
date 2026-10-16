@@ -83,6 +83,10 @@
         homeModule = ./hosts/jok-nixos/home.nix;
         mainConfiguration = ./hosts/jok-nixos/default.nix;
       };
+      jokub-vm = mkHost {
+        hostname = "jokub-vm";
+        mainConfiguration = ./hosts/vm/configuration.nix;
+      };
     };
   };
 }
