@@ -28,6 +28,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # flake-parts.url = "github:hercules-ci/flake-parts";
+    # import-tree.url = "github:vic/import-tree";
+    # wrapper-modules.url = "gitub:BirdeeHub/nix-wrapper-modules";
   };
 
   outputs = { 
