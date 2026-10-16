@@ -6,6 +6,12 @@
 
     prefer-no-csd = true;
 
+    # Force Niri to use the NVIDIA render device. Without this (and the
+    # nvidia-drm modeset/fbdev kernel params), Niri can fail to initialize
+    # the display on NVIDIA with:
+    #   EGL_EXT_device_query not supported
+    debug."render-drm-device" = "/dev/dri/renderD128";
+
     input = {
       keyboard.xkb = {
         layout = "us,ru";
@@ -26,14 +32,14 @@
     };
 
     # ⇩ EDIT ME: name your outputs (`niri msg outputs` lists them) for scale/pos.
-    outputs."DP-1" = {
-    #   scale = local.monitorScale;
-      mode = {
-        width = 2560;
-        height = 1440;
-        refresh = 165.080;
-      };
-    };
+    # outputs."DP-1" = {
+    # #   scale = local.monitorScale;
+    #   mode = {
+    #     width = 2560;
+    #     height = 1440;
+    #     refresh = 165.080;
+    #   };
+    # };
 
     layout = {
       gaps = 12;

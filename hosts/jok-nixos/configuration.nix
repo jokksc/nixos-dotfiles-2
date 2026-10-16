@@ -5,13 +5,13 @@ in
 {
   imports = [
     # Common programs + Steam
-    ../../modules/nixos/programs/common.nix
-    ../../modules/nixos/programs/common-desktop.nix
-    ../../modules/nixos/programs/gaming/default.nix
-    ../../modules/nixos/programs/ai.nix
+    ../../modules/nixos/common.nix
+    ../../modules/nixos/common-desktop.nix
+    ../../modules/nixos/steam.nix
+    ../../modules/nixos/llama-cpp.nix
     
     # Desktop common configs
-    ../../modules/nixos/programs/gnome.nix
+    ../../modules/nixos/gnome.nix
 
     # inputs.noctalia.nixosModules.default
     # ../../modules/nixos/programs/noctalia.nix
@@ -19,8 +19,8 @@ in
     # ../../modules/nixos/programs/niri.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
-    ../../modules/nixos/nvidia/turing.nix
-    ../../modules/nixos/nvidia/cuda.nix
+    ../../modules/nixos/nvidia-turing.nix
+    ../../modules/nixos/nvidia-cuda.nix
     
     # Random util modules
     ../../modules/nixos/usbmuxd.nix # iOS usb
@@ -84,4 +84,7 @@ in
   # };
   
   system.stateVersion = "26.05";
+
+  # Niri config vvv
+  
 }

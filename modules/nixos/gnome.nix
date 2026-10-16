@@ -7,7 +7,7 @@
   # trim the bloat you don't want, e.g.:
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
-    epiphany
+    # epiphany
   #  gnome-photos
   ];
 
