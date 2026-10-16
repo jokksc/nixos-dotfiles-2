@@ -22,8 +22,8 @@ in
     # ../../modules/home/gnome.nix
     # ../../modules/home/vscode.nix
     # ../../modules/home/stylix.nix
-    # ../../modules/home/niri.nix
-    # ../../modules/home/noctalia.nix
+    ../../modules/home/niri.nix
+    ../../modules/home/noctalia.nix
   ];
   
   home.username = "jokub";
