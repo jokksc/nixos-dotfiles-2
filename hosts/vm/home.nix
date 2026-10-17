@@ -22,8 +22,8 @@ in
     # ../../modules/home/gnome.nix
     # ../../modules/home/vscode.nix
     # ../../modules/home/stylix.nix
-    ../../modules/home/niri.nix
-    ../../modules/home/noctalia.nix
+    # ../../modules/home/niri.nix
+    # ../../modules/home/noctalia.nix
   ];
   
   home.username = "jokub";
@@ -86,17 +86,17 @@ in
   #   PI_DISABLE_EXTENSIONS = "rtk"; 
   # };
 
-  programs.opencode = {
-    enable = true;
-    # skills = ../../dotfiles/skills
-    web = {
-      enable = true;
-      extraArgs = [
-        "--port" "4096"
-        "--hostname" "0.0.0.0"
-      ];
-    };
-  };
+  # programs.opencode = {
+  #   enable = true;
+  #   # skills = ../../dotfiles/skills
+  #   web = {
+  #     enable = true;
+  #     extraArgs = [
+  #       "--port" "4096"
+  #       "--hostname" "0.0.0.0"
+  #     ];
+  #   };
+  # };
 
   # sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   # sops.defaultSopsFile = ../../secrets/brave-search.yaml;
