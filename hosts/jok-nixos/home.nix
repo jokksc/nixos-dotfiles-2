@@ -174,6 +174,7 @@ in
     # rnote
     # ptyxis
     wl-clipboard
+    oxker
   ];
   
   programs.fzf.enable = true;

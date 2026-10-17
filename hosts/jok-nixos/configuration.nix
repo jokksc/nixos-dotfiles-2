@@ -19,8 +19,8 @@ in
     ../../modules/nixos/niri.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
-    ../../modules/nixos/nvidia-turing.nix
-    ../../modules/nixos/nvidia-cuda.nix
+    ../../modules/nixos/nvidia-only-turing.nix
+    ../../modules/nixos/nvidia-only-cuda.nix
     
     # Random util modules
     ../../modules/nixos/usbmuxd.nix # iOS usb

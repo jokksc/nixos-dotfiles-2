@@ -27,7 +27,7 @@
     git 
     pfetch
     openssl
-    oxker
+    # oxker
     nix-output-monitor
   ];
   
