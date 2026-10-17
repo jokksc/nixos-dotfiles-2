@@ -14,9 +14,9 @@ in
     ../../modules/nixos/gnome.nix
 
     inputs.noctalia.nixosModules.default
-    ../../modules/nixos/noctalia.nix
+    # ../../modules/nixos/noctalia.nix
     # ../../modules/nixos/stylix.nix
-    ../../modules/nixos/niri.nix
+    # ../../modules/nixos/niri.nix
     
     # NVIDIA GPU module (for Turing gpus or newer)
     ../../modules/nixos/nvidia-only-turing.nix
@@ -29,7 +29,7 @@ in
     ../../modules/nixos/ssh.nix
     ../../modules/nixos/locale.nix # English language + Lithuanian locale
     ../../modules/nixos/virtualisation.nix
-    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/fonts-default.nix
     ../../modules/nixos/pipewire.nix
     # ../../modules/nixos/waydroid.nix
     ../../modules/nixos/docker.nix
