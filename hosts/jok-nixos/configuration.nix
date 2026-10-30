@@ -8,12 +8,12 @@ in
     ../../modules/nixos/common.nix
     ../../modules/nixos/common-desktop.nix
     ../../modules/nixos/steam.nix
-    ../../modules/nixos/llama-cpp.nix
+    # ../../modules/nixos/llama-cpp.nix
     
     # Desktop common configs
-    ../../modules/nixos/gnome.nix
+    ../../modules/setups/desktops/gnome-01.nix
 
-    inputs.noctalia.nixosModules.default
+    # inputs.noctalia.nixosModules.default
     # ../../modules/nixos/noctalia.nix
     # ../../modules/nixos/stylix.nix
     # ../../modules/nixos/niri.nix
@@ -73,6 +73,7 @@ in
     #   });
     # })
     t3code
+    pi-coding-agent
   ];
   
   virtualisation.docker.enableOnBoot = false;
