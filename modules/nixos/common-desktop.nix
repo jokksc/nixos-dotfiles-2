@@ -29,22 +29,4 @@ in
     enable = true;
     enable32Bit = true;
   };
-
-  environment.systemPackages = with pkgs; [
-    vscode
-    # vscodium
-    kdePackages.filelight
-    # pinta
-    # rnote
-    ptyxis
-    pika-backup
-    mission-center
-    resources
-    blackbox-terminal
-    python314
-    ddcutil
-    vicinae
-    cbonsai
-    # inputs.helix.packages."${pkgs.stdenv.hostPlatform.system}".helix
-  ];
 }

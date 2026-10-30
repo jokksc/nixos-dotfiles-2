@@ -2,19 +2,18 @@
 {
   environment.systemPackages = with pkgs; [
     vscode
-    firefox
-    # vscodium
-    kdePackages.filelight
-    # pinta
-    # rnote
-    ptyxis
-    pika-backup
-    mission-center
-    resources
-    blackbox-terminal
-    python314
-    ddcutil
-    vicinae
-    cbonsai
+  ];
+
+  home-manager.sharedModules = [
+    ({ config, lib, pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        nodejs
+        nixpkgs-fmt
+        neovim
+        httpie
+        nixd
+      ];
+    })
   ];
 }

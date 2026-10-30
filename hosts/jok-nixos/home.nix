@@ -131,11 +131,6 @@ in
 #  };
   
 #  home.file.".config/qtile".source = ./home-manager-dotfiles/qtile;
-  home.file.".config/bat/config".text = ''
-    --theme="Nord"
-    --style="numbers,changes,grid"
-    --paging=auto
-  '';
   
 #  xdg.configFile."qtile" = { # this symlinks config existing in home-manager-dotfiles to current nix build, making it easier to change and get live updates, without needing to rebuild nixos
 #    source = config.lib.file.mkOutOfStoreSymlink "/home/jokub/nixos-dotfiles-2/home-manager-dotfiles/qtile/";
@@ -154,48 +149,6 @@ in
 #    recursive = true;
 #  };
   
-  home.packages = with pkgs; [
-    bat
-    atool
-    httpie
-    neovim
-    # nil #lsp for nix language
-    nixd # switched to this
-    nixpkgs-fmt
-    ripgrep # used for telescope to work?
-    nodejs
-    # gss # for compilation
-    # obsidian
-    localsend
-    vesktop
-    spotify
-    # pinta
-    # rnote
-    # ptyxis
-    wl-clipboard
-    oxker
-  ];
-  
-  programs.fzf.enable = true;
 
-  programs.obsidian = {
-    enable = true;
-    package = pkgs.obsidian;
-    # vaults."Documents/Obsidian Vaults/stylix" = {
-    #   enable = true;
-    #   settings.appearance = {
-    #     "baseFontSize" = 16;
-    #     "showRibbon" = false;
-    #     # "enabledCssSnippets" = [
-    #     #   "Banner"
-    #     #   "Vault Tweaks"
-    #     #   "style-settings"
-    #     # ];
-    #     "nativeMenus" = false;
-    #     "cssTheme" = "Minimal";
-    #     "slidingSidebar" = true;
-    #     "floatingNavigation" = true;
-    #   };
-    # };
-  };
+  
 }

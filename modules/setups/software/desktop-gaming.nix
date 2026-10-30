@@ -8,7 +8,7 @@
     ({ config, lib, pkgs, ... }:
     {
       imports = [
-        ../../../home/prismlauncher.nix
+        ../../home/prismlauncher.nix
       ];
     })
   ];

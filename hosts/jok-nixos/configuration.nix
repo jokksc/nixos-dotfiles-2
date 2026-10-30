@@ -4,14 +4,25 @@ let
 in
 {
   imports = [
+
+    # Desktop
+    ../../modules/setups/desktops/gnome-01.nix
+
+    # Software
+    ../../modules/setups/software/core-common.nix
+    ../../modules/setups/software/desktop-common.nix
+    ../../modules/setups/software/desktop-development.nix
+    ../../modules/setups/software/desktop-gaming.nix
+    ../../modules/setups/software/flatpak-common.nix
+    # Features
+
+    # ---
+    # OLDER STUFF
+
     # Common programs + Steam
     ../../modules/nixos/common.nix
     ../../modules/nixos/common-desktop.nix
-    ../../modules/nixos/steam.nix
     # ../../modules/nixos/llama-cpp.nix
-    
-    # Desktop common configs
-    ../../modules/setups/desktops/gnome-01.nix
 
     # inputs.noctalia.nixosModules.default
     # ../../modules/nixos/noctalia.nix

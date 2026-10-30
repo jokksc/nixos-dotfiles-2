@@ -17,18 +17,5 @@
   
   services.printing.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    vim 
-    wget 
-    fresh-editor 
-    alacritty 
-    neovim 
-    btop  
-    git 
-    pfetch
-    openssl
-    # oxker
-    nix-output-monitor
-  ];
   
 }
