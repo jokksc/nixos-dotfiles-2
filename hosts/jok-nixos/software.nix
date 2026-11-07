@@ -4,6 +4,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -14,28 +15,6 @@
     # Flatpak support
     ../../modules/nixos/flatpak.nix
   ];
-
-  programs.firefox.enable = true;
-
-  virtualisation.podman.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      # ovmf.enable = true;
-      # ovmf.packages = [ pkgs.OVMFFull.fd ];
-    };
-  };
-  programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-  boot.kernelModules = [ "kvm-intel" ];
-
-  programs.localsend = {
-    enable = true;
-    openFirewall = true;
-  };
 
   environment.systemPackages = with pkgs; [
     # Core
@@ -77,12 +56,35 @@
     podman # you also need to enable module - see above
   ];
 
+  programs.firefox.enable = true;
+
+  virtualisation.podman.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      # ovmf.enable = true;
+      # ovmf.packages = [ pkgs.OVMFFull.fd ];
+    };
+  };
+  programs.virt-manager.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  boot.kernelModules = [ "kvm-intel" ];
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   home-manager.sharedModules = [
     (
       {
         config,
         lib,
         pkgs,
+        inputs, 
         ...
       }:
       let
@@ -93,14 +95,14 @@
       in
       {
         imports = [
-          # Gaming
+          # My Modules
           ../../modules/home/prismlauncher.nix
-
-          # Flatpak
           ../../modules/home/flatpak.nix
+
+          # homeModules
+          inputs.zen-browser.homeModules.beta
         ];
 
-        # NOTE: i should make an option to remove discord when loading this module
         home.packages = with pkgs; [
           vesktop
           spotify
@@ -118,6 +120,50 @@
           nixd
         ];
 
+        services.flatpak.packages = (map fromFlathub [
+          "com.obsproject.Studio"
+          "com.github.PintaProject.Pinta"
+          "com.github.flxzt.rnote"
+          "net.ankiweb.Anki"
+          "ca.desrt.dconf-editor"
+          "com.github.finefindus.eyedropper"
+          "com.ranfdev.Geopard"
+          # "org.localsend.localsend_app"
+          "io.gitlab.news_flash.NewsFlash"
+          "org.vinegarhq.Sober"
+          "com.stremio.Stremio"
+          "org.telegram.desktop"
+          "io.github.tanaybhomia.Whisp"
+          "page.codeberg.M23Snezhok.Vinyl"
+          "de.swsnr.turnon"
+        ]) ++ [
+          # { appId = "org.gnome.Boxes.Devel"; origin = "gnome-nightly";}
+        ];
+
+        programs.zen-browser = {
+          enable = true;
+          setAsDefaultBrowser = true;
+        };
+
+        programs.opencode = {
+          enable = true;
+          # skills = ../../dotfiles/skills
+          web = {
+            enable = true;
+            extraArgs = [
+              "--port" "4096"
+              "--hostname" "0.0.0.0"
+            ];
+          };
+          settings = {
+            # mcp."brave-search" = {
+            #   type = "local";
+            #   command = [ "npx" "-y" "@brave/brave-search-mcp" ];
+            #   enabled = true;
+            #   environment.BRAVE_API_KEY = "{file:${config.home.homeDirectory}/.config/sops-nix/secrets/brave_api_key}";
+            # };
+          };
+        };
         programs.fzf.enable = true;
 
         programs.obsidian = {
@@ -140,26 +186,6 @@
           #   };
           # };
         };
-
-        services.flatpak.packages = (map fromFlathub [
-          "com.obsproject.Studio"
-          "com.github.PintaProject.Pinta"
-          "com.github.flxzt.rnote"
-          "net.ankiweb.Anki"
-          "ca.desrt.dconf-editor"
-          "com.github.finefindus.eyedropper"
-          "com.ranfdev.Geopard"
-          # "org.localsend.localsend_app"
-          "io.gitlab.news_flash.NewsFlash"
-          "org.vinegarhq.Sober"
-          "com.stremio.Stremio"
-          "org.telegram.desktop"
-          "io.github.tanaybhomia.Whisp"
-          "page.codeberg.M23Snezhok.Vinyl"
-          "de.swsnr.turnon"
-        ]) ++ [
-          # { appId = "org.gnome.Boxes.Devel"; origin = "gnome-nightly";}
-        ];
       }
     )
   ];

@@ -42,9 +42,9 @@
     sops-nix,
     ... 
   }@inputs: let
-    myOptions.users.primaryUser = "jokub";
+    
 
-    mkHost = { homeModule, mainConfiguration, hostname, ... }:
+    mkHost = { homeModule, mainConfiguration, primaryUser, hostname, ... }:
     let
       system = "x86_64-linux";
       unstable = import nixpkgs-unstable {
@@ -54,7 +54,7 @@
     in
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs myOptions hostname unstable; };
+      specialArgs = { inherit inputs primaryUser hostname unstable; };
       modules = [
         mainConfiguration
         home-manager.nixosModules.home-manager
@@ -64,7 +64,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "backup";
-            extraSpecialArgs = { inherit inputs myOptions; };
+            extraSpecialArgs = { inherit inputs primaryUser; };
             # sharedModules = [ inputs.stylix.homeModules.stylix ];
             users.jokub = { imports = [ homeModule ]; };
           };
@@ -76,11 +76,13 @@
     nixosConfigurations = {
       jok-nixos = mkHost {
         hostname = "jok-nixos";
+        primaryUser = "jokub";
         homeModule = ./hosts/jok-nixos/home.nix;
         mainConfiguration = ./hosts/jok-nixos/default.nix;
       };
       jokub-vm = mkHost {
         hostname = "jokub-vm";
+        primaryUser = "jokub";
         homeModule = ./hosts/vm/home.nix;
         mainConfiguration = ./hosts/vm/configuration.nix;
       };

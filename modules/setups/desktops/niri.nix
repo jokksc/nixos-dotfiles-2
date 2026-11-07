@@ -97,6 +97,8 @@
         ../../home/niri.nix
         ../../home/noctalia.nix
         ../../home/stylix.nix # obsidian theming is disabled
+
+        inputs.stylix.homeModules.stylix
       ];
     }
   )];

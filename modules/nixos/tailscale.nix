@@ -1,7 +1,4 @@
-{ lib, config, pkgs, myOptions, ...}:
-let
-  primaryUser = myOptions.users.primaryUser;
-in
+{ lib, config, pkgs, primaryUser, ...}:
 {
   services.tailscale = {
     enable = true;

@@ -1,7 +1,4 @@
-{ config, lib, pkgs, myOptions, inputs, hostname,... }:
-let
-  primaryUser = myOptions.users.primaryUser;
-in
+{ config, lib, pkgs, primaryUser, hostname,... }:
 {
   # Modules
   # ---

@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ...}:
+{ config, pkgs, inputs, primaryUser, ...}:
 let
 #  secrets = import ./secrets.nix
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
@@ -11,20 +11,12 @@ let
 in    
 {
   imports = [
-    inputs.zen-browser.homeModules.beta
     inputs.sops-nix.homeModules.sops
-    # inputs.stylix.homeModules.stylix
-    # inputs.pi-nix.homeManagerModules.default
-    # ../../modules/home/bash.nix
     ../../modules/home/zsh.nix
-    # ../../modules/home/gnome.nix
     ../../modules/home/vscode.nix
-    # ../../modules/home/stylix.nix
-    # ../../modules/home/niri.nix
-    # ../../modules/home/noctalia.nix
   ];
   
-  home.username = "jokub";
+  home.username = (toString primaryUser);
   home.homeDirectory = "/home/jokub";
   home.stateVersion = "26.05";
 
@@ -35,46 +27,13 @@ in
 #    userEmail = ""
 #  };
 # skipped for now, since idk how to store emails/secrets  without pushing to git repos 
-  # programs.pi-coding-agent = {
-  #   enable = true;
-  #   # extensions = [ "all" ];
-  #   # disabledExtensions = [ "rtk" ];
-  #   # https://github.com/cyprx/pi.nix
-  # };
-  # BULLSHITTTT
  
-  # home.sessionVariables = {
-  #   PI_EXTENSIONS = "all";
-  #   PI_DISABLE_EXTENSIONS = "rtk"; 
-  # };
 
-  programs.opencode = {
-    enable = true;
-    # skills = ../../dotfiles/skills
-    web = {
-      enable = true;
-      extraArgs = [
-        "--port" "4096"
-        "--hostname" "0.0.0.0"
-      ];
-    };
-  };
 
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   sops.defaultSopsFile = ../../secrets/brave-search.yaml;
   sops.secrets.brave_api_key = { };
 
-  programs.opencode.settings.mcp."brave-search" = {
-    type = "local";
-    command = [ "npx" "-y" "@brave/brave-search-mcp" ];
-    enabled = true;
-    environment.BRAVE_API_KEY = "{file:${config.home.homeDirectory}/.config/sops-nix/secrets/brave_api_key}";
-  };
-  
-  programs.zen-browser = {
-    enable = true;
-    setAsDefaultBrowser = true;
-  };
 #    initExtra = ''
 #      export PS1='\[\e[48;5;33m\]\u\[\e[0m\] \[\e[48;5;33m\]in \w\[\e[0m\] \\$ '
 #    '';
