@@ -1,7 +1,9 @@
-{ config, lib, pkgs, primaryUser, hostname,... }:
+{ inputs, config, lib, pkgs, primaryUser, hostname,... }:
 {
   # Modules
   # ---
+
+  # System Modules
   imports = [
     # Desktop
     ../../modules/setups/desktops/gnome.nix
@@ -21,7 +23,22 @@
     ../../modules/nixos/ssh.nix
     ../../modules/nixos/autogc.nix
   ];
-  
+
+  # Home Modules
+
+  home-manager.sharedModules = [(
+    { config, pkgs, inputs, primaryUser, ...}:
+    {
+      imports = [
+        inputs.sops-nix.homeModules.sops
+        ../../modules/home/zsh.nix
+        ../../modules/home/bash.nix
+        ../../modules/home/shell-aliases.nix
+        ../../modules/home/vscode.nix
+      ];
+    }
+  )];
+
   # Graphics
   # ---
 
@@ -53,7 +70,7 @@
     };
   };
 
-  # Extra Options
+  # Extra System Options
   # ---
 
   boot.loader.systemd-boot.enable = true;
@@ -62,10 +79,15 @@
   boot.kernelModules = [ "i2c-dev" ];
   hardware.i2c.enable = true; 
 
+  programs.zsh.enable = true;
+  # i should turn this into a proper nix module
+
   users.users.${primaryUser} = {
     extraGroups = [ "i2c" "networkmanager" "video" "audio" "input" "libvirtd" "kvm" "wheel" ];
     isNormalUser = true;
     description = "Jokubas";
+    # system-wide login shell (tty/ssh login, terminals spawning $SHELL)
+    shell = pkgs.zsh;
   };
 
   virtualisation.docker.enableOnBoot = false;
@@ -104,5 +126,4 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "26.05";
-  
 }

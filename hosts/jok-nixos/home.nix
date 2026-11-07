@@ -10,11 +10,6 @@ let
   # primaryUser = inputs.myOptions.users.primaryUser;
 in    
 {
-  imports = [
-    inputs.sops-nix.homeModules.sops
-    ../../modules/home/zsh.nix
-    ../../modules/home/vscode.nix
-  ];
   
   home.username = (toString primaryUser);
   home.homeDirectory = "/home/jokub";

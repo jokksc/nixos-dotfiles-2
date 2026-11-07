@@ -7,11 +7,10 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    # shared aliases come from home.shellAliases (modules/home/shell-aliases.nix);
+    # keep only zsh-specific ones here
     shellAliases = {
-      btw = "echo i use nixos btw";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
-      syu = "sudo nix flake update --flake ~/nixos-dotfiles-2 && sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jok-nixos";
-      nrs2 = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles-2#jokub-vm";
+      
     };
 
     oh-my-zsh = {

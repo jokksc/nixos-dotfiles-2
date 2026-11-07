@@ -81,7 +81,7 @@
         gnomeExtensions.caffeine
         gnomeExtensions.tailscale-qs
         gnomeExtensions.copyous
-        # you will also need to install Medialine, 
+        gnomeExtensions.medialine
       ];
     }
   )];

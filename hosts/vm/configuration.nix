@@ -70,11 +70,17 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # zsh runtime system-wide (/etc/zshenv, /etc/zshrc, NixOS env integration)
+  # — complements the per-user dotfiles from home-manager
+  programs.zsh.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."jokub" = {
     isNormalUser = true;
     description = "jokub";
     extraGroups = [ "networkmanager" "wheel" ];
+    # system-wide login shell (tty/ssh login, terminals spawning $SHELL)
+    shell = pkgs.zsh;
     packages = with pkgs; [
     #  thunderbird
     ];
