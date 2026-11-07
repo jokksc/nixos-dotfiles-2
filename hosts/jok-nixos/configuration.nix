@@ -6,7 +6,7 @@ in
   imports = [
 
     # Desktop
-    ../../modules/setups/desktops/gnome-01.nix
+    ../../modules/setups/desktops/gnome.nix
 
     # Software
     ../../modules/setups/software/core-common.nix
@@ -35,7 +35,6 @@ in
     
     # Random util modules
     ../../modules/nixos/usbmuxd.nix # iOS usb
-    ../../modules/nixos/flatpak.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/ssh.nix
     ../../modules/nixos/locale.nix # English language + Lithuanian locale

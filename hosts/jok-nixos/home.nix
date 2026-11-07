@@ -1,6 +1,5 @@
 { config, pkgs, inputs, ...}:
 let
-  fromFlathub = appId: { inherit appId; origin = "flathub"; };
 #  secrets = import ./secrets.nix
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles-2/dotfiles";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -13,7 +12,6 @@ in
 {
   imports = [
     inputs.zen-browser.homeModules.beta
-    inputs.flatpaks.homeManagerModules.nix-flatpak
     inputs.sops-nix.homeModules.sops
     # inputs.stylix.homeModules.stylix
     # inputs.pi-nix.homeManagerModules.default
@@ -30,42 +28,6 @@ in
   home.homeDirectory = "/home/jokub";
   home.stateVersion = "26.05";
 
-  services.flatpak.remotes = [
-    {
-      name = "flathub";
-      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-    }
-    {
-      name = "gnome-nightly";
-      location = "https://nightly.gnome.org/gnome-nightly.flatpakrepo";
-    }
-  ];
-
-  services.flatpak.packages = (map fromFlathub [
-    "com.obsproject.Studio"
-    "com.github.PintaProject.Pinta"
-    "com.github.flxzt.rnote"
-    "net.ankiweb.Anki"
-    "ca.desrt.dconf-editor"
-    "com.github.finefindus.eyedropper"
-    "com.ranfdev.Geopard"
-    # "org.localsend.localsend_app"
-    "io.gitlab.news_flash.NewsFlash"
-    "org.vinegarhq.Sober"
-    "com.stremio.Stremio"
-    "org.telegram.desktop"
-    "io.github.tanaybhomia.Whisp"
-    "page.codeberg.M23Snezhok.Vinyl"
-    "de.swsnr.turnon"
-  ]) ++ [
-    # { appId = "org.gnome.Boxes.Devel"; origin = "gnome-nightly";}
-  ];
-
-  services.flatpak.update.onActivation = true;
-  services.flatpak.update.auto = {
-    enable = true;
-    onCalendar = "daily";
-  };
 
 #  programs.git = {
 #    enable = true;

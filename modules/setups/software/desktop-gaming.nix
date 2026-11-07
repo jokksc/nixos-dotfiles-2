@@ -1,7 +1,7 @@
 { lib, config, pkgs, ...}:
 {
   imports = [
-    ../../../nixos/steam.nix
+    ../../nixos/steam.nix
   ];
 
   home-manager.sharedModules = [

@@ -58,5 +58,9 @@
      gnomeExtensions.appindicator
      gnomeExtensions.blur-my-shell
      gnomeExtensions.brightness-control-using-ddcutil
+     gnomeExtensions.caffeine
+     gnomeExtensions.tailscale-qs
+     gnomeExtensions.copyous
+     # you will also need to install Medialine, 
    ];
 }

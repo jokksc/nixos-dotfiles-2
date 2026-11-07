@@ -2,7 +2,7 @@
   
 {
   imports = [
-    ../nixos/gnome.nix
+    ../../nixos/gnome.nix
   ];
 
   home-manager.sharedModules = [
