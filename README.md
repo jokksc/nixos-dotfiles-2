@@ -2,7 +2,7 @@
 
 My NixOS configuration setup
 
-![Preview](https://github.com/jokksc/nixos-dotfiles-2/preview.png)
+![Preview](https://github.com/jokksc/nixos-dotfiles-2/blob/master/preview.png)
 
 ## File structure
 
