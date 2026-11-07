@@ -9,11 +9,7 @@ in
     ../../modules/setups/desktops/gnome.nix
 
     # Software
-    ../../modules/setups/software/core-common.nix
-    ../../modules/setups/software/desktop-common.nix
-    ../../modules/setups/software/desktop-development.nix
-    ../../modules/setups/software/desktop-gaming.nix
-    ../../modules/setups/software/flatpak-common.nix
+    ./software.nix
     # Features
 
     # ---
