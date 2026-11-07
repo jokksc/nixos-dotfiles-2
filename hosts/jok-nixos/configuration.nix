@@ -3,94 +3,109 @@ let
   primaryUser = myOptions.users.primaryUser;
 in
 {
+  # Modules
+  # ---
   imports = [
-
     # Desktop
     ../../modules/setups/desktops/gnome.nix
 
     # Software
     ./software.nix
-    # Features
-
-    # ---
-    # OLDER STUFF
-
-    # Common programs + Steam
-    ../../modules/nixos/common.nix
-    ../../modules/nixos/common-desktop.nix
+    ../../modules/nixos/usbmuxd.nix # iOS usb
+    ../../modules/nixos/fonts-default.nix
+    ../../modules/nixos/docker.nix
+    # ../../modules/nixos/waydroid.nix
     # ../../modules/nixos/llama-cpp.nix
 
-    # inputs.noctalia.nixosModules.default
-    # ../../modules/nixos/noctalia.nix
-    # ../../modules/nixos/stylix.nix
-    # ../../modules/nixos/niri.nix
-    
-    # NVIDIA GPU module (for Turing gpus or newer)
-    ../../modules/nixos/nvidia-only-turing.nix
-    ../../modules/nixos/nvidia-only-cuda.nix
-    
-    # Random util modules
-    ../../modules/nixos/usbmuxd.nix # iOS usb
+    # Features
+    ../../modules/nixos/locale.nix # English language + Lithuanian locale
+    ../../modules/nixos/appimage-compat.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/ssh.nix
-    ../../modules/nixos/locale.nix # English language + Lithuanian locale
-    ../../modules/nixos/virtualisation.nix
-    ../../modules/nixos/fonts-default.nix
-    ../../modules/nixos/pipewire.nix
-    # ../../modules/nixos/waydroid.nix
-    ../../modules/nixos/docker.nix
-
-    # Auto gc
     ../../modules/nixos/autogc.nix
   ];
   
-  networking.hostName = hostname;
-  # HOW TO CORRECTLY (imo) ENTER HOSTNAMES IN OTHER MODULES:
-  # { config, ...}:
-  # let
-  #   hostname = config.networking.hostname
-  # in
-  # { ... }
+  # Graphics
+  # ---
 
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
-  
-  environment.systemPackages = with pkgs; [
-    # code-cursor
-    # open-webui
-    #pi-coding-agent
-    uv
-    ghostty
-    zsh
-    uxplay
-    # (t3code.override {
-    #   t3code-unwrapped = t3code.unwrapped.overrideAttrs (old: {
-    #     version = "0.0.45";
-    #     src = old.src.override {
-    #       tag = "v0.0.45";
-    #       hash = "sha256-8drTHjFqa2vJ96jhpRZXmNbtbXtKk1q40jOEp9dohNc=";
-    #     };
-    #     pnpmDeps = old.pnpmDeps.override {
-    #       hash = "sha256-2dGEHOQrnidTei54NlZTJh5u5/i810hb2LddK4XfUNQ=";
-    #     };
-    #   });
-    # })
-    t3code
-    pi-coding-agent
+  # This is for turing graphic cards
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+  };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
   ];
-  
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    powerManagement = {
+      enable = true;
+      finegrained = false; #claude said to set this to true if its a hybrid laptop gpu
+    };
+  };
+
+  # Extra Options
+  # ---
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.kernelModules = [ "i2c-dev" ];
+  hardware.i2c.enable = true; 
+
+  users.users.${primaryUser} = {
+    extraGroups = [ "i2c" "networkmanager" "video" "audio" "input" "libvirtd" "kvm" "wheel" ];
+    isNormalUser = true;
+    description = "Jokubas";
+  };
+
   virtualisation.docker.enableOnBoot = false;
 
-  # users.users.${primaryUser} = {
-  #   isNormalUser = true;
-  #   description = "Jokubas";
-  #   extraGroups = [ "wheel" ];
-  # };
-  
-  system.stateVersion = "26.05";
+  networking.hostName = hostname;
+  networking.networkmanager.enable = true;
 
-  # Niri config vvv
+  services.printing.enable = true;
+
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+  
+  nix.settings.extra-substituters = [
+    "https://niri.cachix.org"
+    "https://noctalia.cachix.org"
+    "https://cache.nixos-cuda.org"
+  ];
+  nix.settings.extra-trusted-public-keys = [
+    "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  system.stateVersion = "26.05";
+  
 }

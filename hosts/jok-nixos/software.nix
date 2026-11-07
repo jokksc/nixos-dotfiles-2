@@ -15,6 +15,28 @@
     ../../modules/nixos/flatpak.nix
   ];
 
+  programs.firefox.enable = true;
+
+  virtualisation.podman.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      # ovmf.enable = true;
+      # ovmf.packages = [ pkgs.OVMFFull.fd ];
+    };
+  };
+  programs.virt-manager.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  boot.kernelModules = [ "kvm-intel" ];
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   environment.systemPackages = with pkgs; [
     # Core
     vim
@@ -45,6 +67,14 @@
     ddcutil
     vicinae
     cbonsai
+    t3code
+    pi-coding-agent
+    uxplay
+    zsh
+    ghostty
+    uv
+    distrobox
+    podman # you also need to enable module - see above
   ];
 
   home-manager.sharedModules = [
