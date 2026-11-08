@@ -54,6 +54,7 @@
     uv
     distrobox
     podman # you also need to enable module - see above
+    refine
   ];
 
   programs.firefox.enable = true;

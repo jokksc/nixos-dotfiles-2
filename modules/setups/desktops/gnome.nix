@@ -23,6 +23,18 @@
       # GNOME-specific home-manager config goes here.
       # Uncomment/adjust as you figure out what you actually want.
 
+      # One module per shell extension declared below, holding its dconf keys.
+      imports = [
+        ../../home/gnome-extension-appindicator.nix
+        ../../home/gnome-extension-blur-my-shell.nix
+        ../../home/gnome-extension-brightness-control-using-ddcutil.nix
+        ../../home/gnome-extension-caffeine.nix
+        ../../home/gnome-extension-copyous.nix
+        ../../home/gnome-extension-dash-to-dock.nix
+        ../../home/gnome-extension-medialine.nix
+        ../../home/gnome-extension-tailscale-qs.nix
+      ];
+
       dconf.settings = {
       #   "org/gnome/desktop/interface" = {
       #     color-scheme = "prefer-dark";
@@ -61,13 +73,6 @@
             (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
             (lib.hm.gvariant.mkTuple [ "xkb" "lt" ])
           ];
-        };
-        "org/gnome/shell/extensions/dash-to-dock" = {
-          click-action = "minimize";
-          dash-max-icon-size = 48;
-        };
-        "org/gnome/shell/extensions/display-brightness-ddcutil" = {
-          button-location = 0;
         };
       };
 
