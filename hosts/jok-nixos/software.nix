@@ -55,6 +55,7 @@
     distrobox
     podman # you also need to enable module - see above
     refine
+    pciutils
   ];
 
   programs.firefox.enable = true;

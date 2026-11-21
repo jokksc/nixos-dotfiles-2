@@ -17,11 +17,13 @@
     # ../../modules/nixos/llama-cpp.nix
 
     # Features
+    ../../modules/setups/services/jellyfin.nix
     ../../modules/nixos/locale.nix # English language + Lithuanian locale
     ../../modules/nixos/appimage-compat.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/ssh.nix
     ../../modules/nixos/autogc.nix
+    inputs.bootvine.nixosModules.default
   ];
 
   # Home Modules
@@ -72,6 +74,8 @@
 
   # Extra System Options
   # ---
+
+  services.bootvine.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
