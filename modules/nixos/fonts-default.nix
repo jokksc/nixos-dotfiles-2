@@ -9,6 +9,6 @@
     twemoji-color-font
     maple-mono.NF
     noto-fonts
-    noto-fonts-color-emoji
+    # noto-fonts-color-emoji
   ];
 }

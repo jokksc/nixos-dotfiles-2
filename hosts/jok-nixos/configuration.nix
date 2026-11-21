@@ -17,7 +17,7 @@
     # ../../modules/nixos/llama-cpp.nix
 
     # Features
-    ../../modules/setups/services/jellyfin.nix
+    # ../../modules/setups/services/jellyfin.nix
     ../../modules/nixos/locale.nix # English language + Lithuanian locale
     ../../modules/nixos/appimage-compat.nix
     ../../modules/nixos/tailscale.nix
