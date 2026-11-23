@@ -19,6 +19,12 @@
     # i got these flakes from https://github.com/floatdrop/nnn-starter/blob/main/flake.nix
     # also dont pin noctalia to nixpkgs, cuz otherwise it would miss cache
     niri.url = "github:sodiboo/niri-flake";
+    # Pond desktop shell sources (raw quickshell/CMake tree, no flake — used by
+    # modules/setups/desktops/pond.nix to build everything from source).
+    pond = {
+      url = "github:bflycomputer/pond-interface";
+      flake = false;
+    };
     noctalia.url = "github:noctalia-dev/noctalia-shell/cachix";
     stylix = {
       url = "github:nix-community/stylix";
@@ -32,6 +38,11 @@
       url = "git+https://codeberg.org/wvhulle/bootvine";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   outputs = { 

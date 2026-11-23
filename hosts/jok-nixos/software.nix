@@ -56,6 +56,8 @@
     podman # you also need to enable module - see above
     refine
     pciutils
+    yazi
+    inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.firefox.enable = true;

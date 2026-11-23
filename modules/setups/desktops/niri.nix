@@ -76,7 +76,7 @@
       monospace = { name = "Maple Mono NF"; };
       sansSerif = { name = "Maple Mono NF"; };
       serif     = { name = "Maple Mono NF"; };
-      emoji     = { name = "Maple Mono NF"; };
+      emoji     = { name = "Apple Color Emoji"; };
       # sansSerif = { name = "Noto Sans"; };
       # serif     = { name = "Noto Serif"; };
       # emoji     = { name = "Noto Color Emoji"; };
