@@ -253,6 +253,19 @@ let
 
   greeterDir = "${pondPkg}/share/pond-interface/lockscreen";
 
+  # Upstream's greeter niri config, extended with the NVIDIA render-device
+  # pin. Without it niri can fail to initialize the display on NVIDIA (same
+  # as modules/home/niri.nix does for the regular session).
+  greeterKdl = pkgs.writeText "pond-greeter-niri.kdl" (
+    builtins.readFile "${pondPkg}/share/pond-interface/lockscreen/greeter/niri.kdl"
+    + ''
+
+    debug {
+        render-drm-device "/dev/dri/renderD128"
+    }
+    ''
+  );
+
   # Confirmed session lock, reused by keybinds and the before-sleep hook.
   beforeSleep = pkgs.writeShellScript "pond-before-sleep" ''
     if ! ${lib.getExe' pkgs.coreutils "timeout"} 4s "${pondPkg}/bin/pond-lock"; then
@@ -352,12 +365,14 @@ let
         }
         mouse {
             accel-profile "flat"
-            natural-scroll
         }
         focus-follows-mouse
         workspace-auto-back-and-forth
     }
   '';
+
+  # GTK stores font DPI in 1024ths of a point: 96 dpi * 1024 = 98304 base.
+  gtkXftDpi = toString (builtins.floor (builtins.div (builtins.mul 98304 (builtins.mul cfg.ui.textScale 100)) 100));
 
   # cfg/*.kdl files the niri config includes (keybinds.kdl is deliberately not
   # included — those binds live in the home-manager settings below).
@@ -372,6 +387,9 @@ let
   ];
 in
 {
+  # Brings in programs.niri (flake settings module + home-manager integration).
+  imports = [ inputs.niri.nixosModules.niri ];
+
   options.programs.pond = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -399,7 +417,10 @@ in
 
     plymouth.enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      # Default off when bootvine (which owns the boot console) is enabled —
+      # the two splash systems don't get along.
+      default = !(options ? services.bootvine);
+      defaultText = "true unless bootvine is enabled (then false)";
       description = "Butterfly's plymouth boot animation.";
     };
 
@@ -414,7 +435,26 @@ in
       default = true;
       description = "Home-manager niri integration: pond keybinds, autostart and config includes.";
     };
+
+    ui.textScale = lib.mkOption {
+      type = lib.types.float;
+      default = 1.15;
+      description = ''
+        GNOME-style text-only scaling (like gsettings text-scaling-factor).
+        Scales font rendering in GTK apps, Qt apps and the terminal without
+        enlarging layout elements. 1.0 = 100%. The pond shell's own panels use
+        pixel-sized fonts and are unaffected — use output scale for those.
+      '';
+    };
+
+    ui.font = lib.mkOption {
+      type = lib.types.str;
+      default = "Onest";
+      description = "Default UI font for GTK apps.";
+    };
   };
+
+
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge (
@@ -431,6 +471,16 @@ in
           pkgs.ibm-plex
         ];
 
+        # Make the pond look the default everywhere: without this everything
+        # that doesn't hardcode a font (GTK apps, terminals without a config,
+        # Qt fallbacks) lands on DejaVu Sans.
+        fonts.fontconfig.defaultFonts = {
+          sansSerif = lib.mkDefault [ "Onest" ];
+          serif = lib.mkDefault [ "Onest" ];
+          monospace = lib.mkDefault [ "JetBrains Mono" ];
+          emoji = lib.mkDefault [ "Apple Color Emoji" ];
+        };
+
         environment.systemPackages =
           with pkgs;
           [
@@ -439,6 +489,22 @@ in
             capitaine-cursors
             xdg-utils
             wl-clipboard
+            vicinae # the launcher pond's Mod+Space/Mod+V spawn (system profile
+            # path, patched into the included config.kdl)
+          ]
+          ++ lib.optionals cfg.shell.enable [
+            # Core desktop apps that used to come with the full GNOME suite
+            # (services.desktopManager.gnome.enable): files, images, pdfs,
+            # text, archives, disks. gvfs gives nautilus trash/network/MTP.
+            nautilus
+            adwaita-icon-theme # GTK icons (used to come with the GNOME suite)
+            loupe # image viewer
+            papers # pdf viewer
+            gnome-text-editor
+            file-roller
+            gnome-disk-utility
+            gvfs
+            gnome-calendar
           ]
           ++ lib.optional cfg.fastfetch.enable fastfetch
           ++ lib.optional cfg.shell.enable swayidle;
@@ -446,15 +512,36 @@ in
         environment.sessionVariables = {
           NIXOS_OZONE_WL = "1";
           NIXPKGS_QT6_QML_IMPORT_PATH = [ "${pondQml}/lib/qt-6/qml" ];
+          # Qt apps scale point-sized fonts with this (the pond shell uses
+          # pixel sizes, so it is unaffected).
+          QT_FONT_DPI = toString (
+            builtins.floor (builtins.div (builtins.mul 96 (builtins.mul cfg.ui.textScale 100)) 100)
+          );
         } // lib.optionalAttrs cfg.lockscreen.enable {
           POND_PAM_SERVICE = "pond-lockscreen";
         };
 
-        # GTK defaults from upstream (dark theme) for GTK apps like nautilus.
-        # mkDefault so other modules (stylix etc.) can override.
+        # GTK defaults from upstream (dark theme) plus our font/text scaling.
+        # gtk-xft-dpi is GNOME's text-scaling-factor equivalent; GTK3 and GTK4
+        # both read it from these ini files. mkDefault so other modules can
+        # override.
         environment.etc = {
-          "xdg/gtk-3.0/settings.ini".source = lib.mkDefault "${pondPkg}/share/pond-interface/config/gtk-3.0/settings.ini";
-          "xdg/gtk-4.0/settings.ini".source = lib.mkDefault "${pondPkg}/share/pond-interface/config/gtk-4.0/settings.ini";
+          "xdg/gtk-3.0/settings.ini".text = lib.mkDefault ''
+            [Settings]
+            gtk-theme-name=Adwaita
+            gtk-icon-theme-name=Adwaita
+            gtk-application-prefer-dark-theme=true
+            gtk-font-name=${cfg.ui.font} 11
+            gtk-xft-dpi=${gtkXftDpi}
+          '';
+          "xdg/gtk-4.0/settings.ini".text = lib.mkDefault ''
+            [Settings]
+            gtk-theme-name=Adwaita
+            gtk-icon-theme-name=Adwaita
+            gtk-application-prefer-dark-theme=true
+            gtk-font-name=${cfg.ui.font} 11
+            gtk-xft-dpi=${gtkXftDpi}
+          '';
         };
 
         # Desktop services the shell talks to over DBus.
@@ -498,7 +585,7 @@ in
             General.GreeterEnvironment = "NIXPKGS_QT6_QML_IMPORT_PATH=${pondQml}/lib/qt-6/qml";
             Theme.ThemeDir = greeterDir;
             Wayland.CompositorCommand =
-              "${lib.getExe config.programs.niri.package} --config ${greeterDir}/greeter/niri.kdl";
+              "${lib.getExe config.programs.niri.package} --config ${greeterKdl}";
           };
           extraPackages = [ pondPkg pondQml ];
         };
@@ -584,6 +671,19 @@ in
                 "Mod+Print".action.screenshot-window = { };
                 "Ctrl+Print".action.screenshot-screen = { };
 
+                # Pond panels via the shell's IPC (same as upstream's optional
+                # keybinds in cfg/keybinds.kdl, which we deliberately don't
+                # include to avoid bind conflicts).
+                "Mod+B".action.spawn = [
+                  "qs" "-c" "pond-shell" "ipc" "call" "sidebar" "toggle"
+                ];
+                "Mod+Comma".action.spawn = [
+                  "qs" "-c" "pond-shell" "ipc" "call" "settings" "toggle"
+                ];
+                "Mod+Shift+Comma".action.spawn = [
+                  "qs" "-c" "pond-shell" "ipc" "call" "settings" "open" "display"
+                ];
+
                 # Help + session
                 "Mod+Shift+Slash".action.show-hotkey-overlay = { };
                 "Mod+Shift+E".action.quit = { };
@@ -603,6 +703,39 @@ in
 
             home.packages = [ pkgs.capitaine-cursors ];
 
+            # GTK apps on Wayland read settings through xdg-desktop-portal,
+            # which serves gsettings/dconf — that overrides the settings.ini
+            # files. Keep the interface font/scale in dconf, in sync with
+            # cfg.ui.textScale.
+            dconf.settings."org/gnome/desktop/interface" = {
+              font-name = lib.mkDefault "${cfg.ui.font} 11";
+              text-scaling-factor = lib.mkDefault cfg.ui.textScale;
+              gtk-theme = lib.mkDefault "Adwaita";
+              icon-theme = lib.mkDefault "Adwaita";
+              color-scheme = lib.mkDefault "prefer-dark";
+            };
+
+            # Terminal font at ~115% of alacritty's 11pt default.
+            programs.alacritty = {
+              enable = true;
+              settings.font.size = lib.mkDefault 12.5;
+            };
+
+            # The launcher server (Mod+Space = `vicinae toggle`).
+            systemd.user.services.vicinae = {
+              Unit = {
+                Description = "Vicinae launcher server";
+                After = [ "graphical-session.target" ];
+                PartOf = [ "graphical-session.target" ];
+              };
+              Service = {
+                ExecStart = "${pkgs.vicinae}/bin/vicinae server";
+                Restart = "on-failure";
+                RestartSec = 2;
+              };
+              Install = { WantedBy = [ "graphical-session.target" ]; };
+            };
+
             # `qs -c pond-shell` resolution (like upstream's /etc/xdg symlink).
             home.file.".config/quickshell/pond-shell".source =
               "${pondPkg}/share/pond-interface/shell";
@@ -614,15 +747,28 @@ in
             # Seed the editable cfg/*.kdl files once (skel-style). Copy-if-
             # missing, so the shell's settings panels can rewrite them and your
             # edits survive rebuilds.
-            home.activation.pondNiriCfg = lib.hm.dag.entryAfter [ "writeBoundary" ] (''
+            home.activation.pondNiriCfg = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+              # Seed the editable cfg/*.kdl files once (skel-style). Copy-if-
+              # missing, so the shell's settings panels can rewrite them and
+              # your edits survive rebuilds. chmod so they stay user-editable
+              # (store files are 444). NOTE: activation runs with `set -u`, so
+              # cfgDir must be assigned before use.
+              ''
               cfgDir="$HOME/.config/niri/cfg"
               mkdir -p "$cfgDir"
             ''
-            + lib.concatMapStringsSep "\n"
-              (f: ''[ -f "$cfgDir/${f}.kdl" ] || cp "${pondPkg}/share/pond-interface/config/niri/cfg/${f}.kdl" "$cfgDir/${f}.kdl"'')
-              (lib.remove "input" pondCfgFiles)
-            + ''
-              [ -f "$cfgDir/input.kdl" ] || cp "${pondInputSeed}" "$cfgDir/input.kdl"
+            + lib.concatStrings (
+                map (f: ''
+              cfg="$cfgDir/${f}.kdl"
+              [ -f "$cfg" ] || cp "${pondPkg}/share/pond-interface/config/niri/cfg/${f}.kdl" "$cfg"
+              chmod u+w "$cfg"
+              '')
+                (lib.remove "input" pondCfgFiles)
+              )
+              + ''
+              cfg="$cfgDir/input.kdl"
+              [ -f "$cfg" ] || cp "${pondInputSeed}" "$cfg"
+              chmod u+w "$cfg"
 
               # Pond Screenshot / wallpaper want somewhere to live.
               mkdir -p "$HOME/.config/pond-interface" "$HOME/Pictures/Wallpapers"

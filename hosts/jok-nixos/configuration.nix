@@ -76,7 +76,7 @@
   # Extra System Options
   # ---
 
-  services.bootvine.enable = true;
+  # services.bootvine.enable = true; # disabled while debugging the pond greeter
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

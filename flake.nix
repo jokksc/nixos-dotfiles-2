@@ -18,7 +18,18 @@
     flatpaks.url = "github:gmodena/nix-flatpak/?ref=latest";
     # i got these flakes from https://github.com/floatdrop/nnn-starter/blob/main/flake.nix
     # also dont pin noctalia to nixpkgs, cuz otherwise it would miss cache
-    niri.url = "github:sodiboo/niri-flake";
+    # MUST follow our nixpkgs: niri is built against it, and a mismatched
+    # nixpkgs means niri's process links an older glibc/glvnd, which makes the
+    # system's mesa/nvidia EGL ICDs fail to load → niri gets no GPU renderer
+    # ("EGL_EXT_device_query not supported", no outputs, black screen).
+    # https://github.com/NixOS/nixpkgs/issues/575803
+    niri = {
+      # bugeats' fork of sodiboo's flake: it picks libdisplay-info to match
+      # each niri source's Cargo.lock, which sodiboo's original no longer does
+      # after nixpkgs removed libdisplay-info_0_2.
+      url = "github:bugeats/niri-flake/update-libdisplay-info";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Pond desktop shell sources (raw quickshell/CMake tree, no flake — used by
     # modules/setups/desktops/pond.nix to build everything from source).
     pond = {
